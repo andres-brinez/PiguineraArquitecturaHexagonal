@@ -21,7 +21,7 @@ namespace PiguineraArquitecturaHexagonal.Domain.Model.Supplier.Entities
 
             Subscribe(new SupplierEventChange(this));
 
-            DateTime registerDate = DateTime.Now;
+            DateTime registerDate = new DateTime(2012, 7, 15, 8, 30, 0);
 
             TimeSpan tiempoTranscurrido = DateTime.UtcNow - registerDate;
             int añosTranscurridos = (int)(tiempoTranscurrido.Days / 365.25); 
