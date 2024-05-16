@@ -1,5 +1,9 @@
 ﻿using PandemyLagacyDDD.Domain.Generic;
+using PandemyLagacyDDD.Domain.Model.City.Events.Configuration;
+using PiguineraArquitecturaHexagonal.Domain.Model.Supplier.Events;
+using PiguineraArquitecturaHexagonal.Domain.Model.Supplier.Values.Information;
 using PiguineraArquitecturaHexagonal.Domain.Model.Supplier.Values.Supplier;
+using System.Drawing;
 using System.Linq.Expressions;
 
 namespace PiguineraArquitecturaHexagonal.Domain.Model.Supplier.Entities
@@ -14,11 +18,12 @@ namespace PiguineraArquitecturaHexagonal.Domain.Model.Supplier.Entities
 
         }
 
-        public SupplierAgregateRoot(String email, string password) : base(new SupplierId())
+        public SupplierAgregateRoot(string email, string password) : base(new SupplierId())
         {
-            UserCredential= new UserCredential(email, password);
-            Information = new Information("", "", "");
-            Information.CalculateSeniority(UserCredential.GetRegistrationDate());
+
+            Subscribe(new SupplierEventChange(this));
+            AppendEvent(new CreatedSupplier(email,password));
+
 
         }
     }
