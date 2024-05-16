@@ -6,4 +6,13 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="Model\Book\Entities\" />
+    <Folder Include="Model\Book\Values\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\PiguineraArquitecturaHexagonal.Domain.Generic\PiguineraArquitecturaHexagonal.Domain.Generic.csproj" />
+  </ItemGroup>
+
 </Project>
