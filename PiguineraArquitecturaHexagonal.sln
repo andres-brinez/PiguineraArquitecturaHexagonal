@@ -3,21 +3,22 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.9.34622.214
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PiguineraArquitecturaHexagonal", "PiguineraArquitecturaHexagonal\PiguineraArquitecturaHexagonal.csproj", "{7338F8D0-0652-4CFD-AEEA-5AF4555C9123}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{D405122D-0944-4DF0-B26F-8BC8A9D5FF4E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Application", "Application", "{519A56C6-EA8D-4324-9E61-D5B0DAFC28D9}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Domain", "Domain", "{B70378B9-EE25-4044-8B02-5663B711C86C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Insfrastructure", "Insfrastructure", "{51CFF36A-AA4E-41FD-9E1B-C5E03DE042CC}"
 EndProject
 Global
-	GlobalSection(SolutionConfigurationPlatforms) = preSolution
-		Debug|Any CPU = Debug|Any CPU
-		Release|Any CPU = Release|Any CPU
-	EndGlobalSection
-	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{7338F8D0-0652-4CFD-AEEA-5AF4555C9123}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7338F8D0-0652-4CFD-AEEA-5AF4555C9123}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7338F8D0-0652-4CFD-AEEA-5AF4555C9123}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7338F8D0-0652-4CFD-AEEA-5AF4555C9123}.Release|Any CPU.Build.0 = Release|Any CPU
-	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{519A56C6-EA8D-4324-9E61-D5B0DAFC28D9} = {D405122D-0944-4DF0-B26F-8BC8A9D5FF4E}
+		{B70378B9-EE25-4044-8B02-5663B711C86C} = {D405122D-0944-4DF0-B26F-8BC8A9D5FF4E}
+		{51CFF36A-AA4E-41FD-9E1B-C5E03DE042CC} = {D405122D-0944-4DF0-B26F-8BC8A9D5FF4E}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {02F9DA9E-369F-447A-83AF-A345F861CF25}
