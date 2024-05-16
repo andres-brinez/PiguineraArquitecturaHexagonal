@@ -6,4 +6,17 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="UseCases\Book\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Moq" Version="4.20.70" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\PiguineraArquitecturaHexagonal.Aplication.Generic\PiguineraArquitecturaHexagonal.Aplication.Generic.csproj" />
+    <ProjectReference Include="..\PiguineraArquitecturaHexagonal.Domain\PiguineraArquitecturaHexagonal.Domain.csproj" />
+  </ItemGroup>
+
 </Project>

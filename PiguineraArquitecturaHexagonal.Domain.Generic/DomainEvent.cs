@@ -8,11 +8,13 @@ namespace PandemyLagacyDDD.Domain.Generic
     {
         public DateTime Moment { get;  set; }
         public int Version { get; set; }
+        [BsonId]
+        [BsonRepresentation(BsonType.String)]
         public string UUID { get;  set; }
         public string Type { get;  set; }
         public string AggregateName { get; set; }
-        [BsonId]
-        [BsonRepresentation(BsonType.String)]
+        // body, informacion del libro para obtenerlo
+        
         public string AggregateId{ get; set; }
 
        

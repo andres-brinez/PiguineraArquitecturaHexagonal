@@ -6,6 +6,8 @@ namespace PandemyLagacyDDD.Domain.Model.City.Events.Configuration
     {
         
         SUPPLIER_CREATED,
+        SENIORITY_CALCULTED,
+
 
     }
 }

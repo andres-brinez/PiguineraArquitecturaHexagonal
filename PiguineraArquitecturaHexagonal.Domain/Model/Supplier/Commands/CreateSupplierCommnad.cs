@@ -3,7 +3,7 @@
 
 namespace PiguineraArquitecturaHexagonal.Domain.Model.Supplier.Commands
 {
-    internal class CreateSupplierCommnad : InitialCommand
+    public class CreateSupplierCommnad : InitialCommand
     {
         public string Email;
         public string Password;

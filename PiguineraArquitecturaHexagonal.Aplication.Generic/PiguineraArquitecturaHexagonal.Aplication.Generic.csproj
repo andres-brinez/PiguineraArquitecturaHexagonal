@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\PiguineraArquitecturaHexagonal.Domain.Generic\PiguineraArquitecturaHexagonal.Domain.Generic.csproj" />
+  </ItemGroup>
+
 </Project>
