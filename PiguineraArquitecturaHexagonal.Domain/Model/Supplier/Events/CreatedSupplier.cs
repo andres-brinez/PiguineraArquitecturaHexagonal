@@ -1,5 +1,5 @@
-﻿using PandemyLagacyDDD.Domain.Generic;
-using PandemyLagacyDDD.Domain.Model.City.Events.Configuration;
+﻿using PiguineraArquitecturaHexagonal.Domain.Generic;
+using PiguineraArquitecturaHexagonal.Domain.Model.City.Events.Configuration;
 
 
 namespace PiguineraArquitecturaHexagonal.Domain.Model.Supplier.Events
@@ -8,11 +8,15 @@ namespace PiguineraArquitecturaHexagonal.Domain.Model.Supplier.Events
     {
         public string Email;
         public string Password;
+        public DateTime RegisterDate;
+        public int Seniority;
 
-        public CreatedSupplier(string email,string password) : base(EventsEnumSupplier.SUPPLIER_CREATED.ToString())
+        public CreatedSupplier(string email,string password, DateTime registerDate,int seniority) : base(EventsEnumSupplier.SUPPLIER_CREATED.ToString(), $"email:{email},password:{password},registerDate:{registerDate},seniority:{seniority}")
         {
             Email = email;
             Password = password;
+            RegisterDate = registerDate;
+
         }
     }
 }

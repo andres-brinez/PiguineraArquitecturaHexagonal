@@ -1,6 +1,6 @@
 ﻿
 
-namespace PandemyLagacyDDD.Domain.Generic
+namespace PiguineraArquitecturaHexagonal.Domain.Generic
 {
     public interface IValueObject<T>
     {

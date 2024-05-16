@@ -1,7 +1,7 @@
-﻿using PandemyLagacyDDD.Domain.Generic;
+﻿using PiguineraArquitecturaHexagonal.Domain.Generic;
 
 
-namespace PandemyLagacyDDD.Application.Generic
+namespace PiguineraArquitecturaHexagonal.Application.Generic
 { 
     // Se encarga de la persistencia de los eventos, es  lo unico que se guarda dentro del dominio
     // Puerto

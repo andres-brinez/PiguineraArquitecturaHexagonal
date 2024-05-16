@@ -1,5 +1,5 @@
 ﻿
-using PandemyLagacyDDD.Domain.Generic;
+using PiguineraArquitecturaHexagonal.Domain.Generic;
 
 namespace PiguineraArquitecturaHexagonal.Domain.Model.Supplier.Values.Information
 {

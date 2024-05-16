@@ -1,7 +1,7 @@
-﻿using PandemyLagacyDDD.Domain.Generic;
+﻿using PiguineraArquitecturaHexagonal.Domain.Generic;
 
 
-namespace PandemyLagacyDDD.Application.Generic
+namespace PiguineraArquitecturaHexagonal.Application.Generic
 {
     // Marca los casos de usos que nacen a partir del lanzamiento de un evento 
     public interface IEventUseCase<T> where T : DomainEvent

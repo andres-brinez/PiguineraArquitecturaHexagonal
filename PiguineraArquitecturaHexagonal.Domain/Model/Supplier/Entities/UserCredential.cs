@@ -1,4 +1,4 @@
-﻿using PandemyLagacyDDD.Domain.Generic;
+﻿using PiguineraArquitecturaHexagonal.Domain.Generic;
 using PiguineraArquitecturaHexagonal.Domain.Model.Supplier.Values.UserCredential;
 
 
@@ -8,7 +8,6 @@ namespace PiguineraArquitecturaHexagonal.Domain.Model.Supplier.Entities
     {
 
         private Email Email;
-        private RegistrationDate RegistrationDate;
         private Password Password;
 
         public UserCredential(UserCredentialId id) : base(id)
@@ -19,7 +18,6 @@ namespace PiguineraArquitecturaHexagonal.Domain.Model.Supplier.Entities
         {
             Email =new Email(email);
             Password =new Password(password);
-            RegistrationDate = new RegistrationDate();
         }
 
 
@@ -33,9 +31,6 @@ namespace PiguineraArquitecturaHexagonal.Domain.Model.Supplier.Entities
             return Email.Value();
         }
 
-        public DateTime GetRegistrationDate()
-        {
-            return RegistrationDate.Value();
-        }
+       
     }
 }

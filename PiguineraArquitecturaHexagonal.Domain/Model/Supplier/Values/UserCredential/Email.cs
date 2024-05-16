@@ -1,5 +1,5 @@
 ﻿
-using PandemyLagacyDDD.Domain.Generic;
+using PiguineraArquitecturaHexagonal.Domain.Generic;
 using System.Text.RegularExpressions;
 
 namespace PiguineraArquitecturaHexagonal.Domain.Model.Supplier.Values.UserCredential

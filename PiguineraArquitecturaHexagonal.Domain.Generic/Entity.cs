@@ -1,5 +1,5 @@
 ﻿
-namespace PandemyLagacyDDD.Domain.Generic
+namespace PiguineraArquitecturaHexagonal.Domain.Generic
 {
     public class Entity<I> where I : Identity
     {

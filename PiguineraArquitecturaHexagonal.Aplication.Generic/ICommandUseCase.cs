@@ -1,7 +1,7 @@
-﻿using PandemyLagacyDDD.Domain.Generic;
+﻿using PiguineraArquitecturaHexagonal.Domain.Generic;
 
 
-namespace PandemyLagacyDDD.Application.Generic
+namespace PiguineraArquitecturaHexagonal.Application.Generic
 {
     public interface ICommandUseCase<T, I> where T : Command<I> where I : Identity
     {

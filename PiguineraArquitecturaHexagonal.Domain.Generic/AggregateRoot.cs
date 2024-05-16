@@ -3,7 +3,7 @@
 using System.Diagnostics.Tracing;
 using System.Security.Principal;
 
-namespace PandemyLagacyDDD.Domain.Generic
+namespace PiguineraArquitecturaHexagonal.Domain.Generic
 {
     public abstract class AggregateRoot<I> : Entity<I> where I : Identity
     {

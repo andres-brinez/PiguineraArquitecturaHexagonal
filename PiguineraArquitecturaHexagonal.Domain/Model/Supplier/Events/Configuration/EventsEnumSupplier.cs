@@ -1,6 +1,6 @@
 ﻿
 
-namespace PandemyLagacyDDD.Domain.Model.City.Events.Configuration
+namespace PiguineraArquitecturaHexagonal.Domain.Model.City.Events.Configuration
 {
     public enum EventsEnumSupplier
     {

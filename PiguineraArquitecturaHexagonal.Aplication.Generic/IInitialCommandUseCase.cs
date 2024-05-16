@@ -1,8 +1,8 @@
 ﻿
 
-using PandemyLagacyDDD.Domain.Generic;
+using PiguineraArquitecturaHexagonal.Domain.Generic;
 
-namespace PandemyLagacyDDD.Application.Generic
+namespace PiguineraArquitecturaHexagonal.Application.Generic
 {
     public interface IInitialCommandUseCase<T> where T : InitialCommand
     {

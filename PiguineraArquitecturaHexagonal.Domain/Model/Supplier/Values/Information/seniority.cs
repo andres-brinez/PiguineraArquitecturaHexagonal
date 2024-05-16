@@ -1,5 +1,5 @@
 ﻿
-using PandemyLagacyDDD.Domain.Generic;
+using PiguineraArquitecturaHexagonal.Domain.Generic;
 
 namespace PiguineraArquitecturaHexagonal.Domain.Model.Supplier.Values.Information
 {
@@ -11,7 +11,7 @@ namespace PiguineraArquitecturaHexagonal.Domain.Model.Supplier.Values.Informatio
         {
             if (level<0)
             {
-                throw new ArgumentException($"Invalid seniority level: {level}");
+                throw new ArgumentException($"Invalid Seniority level: {level}");
             }
 
             Level = level;

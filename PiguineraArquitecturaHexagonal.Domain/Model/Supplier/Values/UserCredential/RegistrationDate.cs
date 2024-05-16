@@ -1,4 +1,4 @@
-﻿using PandemyLagacyDDD.Domain.Generic;
+﻿using PiguineraArquitecturaHexagonal.Domain.Generic;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,7 +18,7 @@ namespace PiguineraArquitecturaHexagonal.Domain.Model.Supplier.Values.UserCreden
 
             if (RegistrationDateValue > DateTime.UtcNow)
             {
-                throw new ArgumentException("La fecha de registro no puede ser posterior a la fecha actual.", nameof(registrationDate));
+                throw new ArgumentException("La fecha de registro no puede ser posterior a la fecha actual.", nameof(RegistrationDateValue));
             }
 
         }

@@ -6,4 +6,15 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="8.0.0" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="8.0.0" />
+    <PackageReference Include="MongoDB.Driver" Version="2.25.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\PiguineraArquitecturaHexagonal.Aplication.Generic\PiguineraArquitecturaHexagonal.Aplication.Generic.csproj" />
+    <ProjectReference Include="..\PiguineraArquitecturaHexagonal.Domain\PiguineraArquitecturaHexagonal.Domain.csproj" />
+  </ItemGroup>
+
 </Project>

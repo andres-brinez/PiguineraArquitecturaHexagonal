@@ -1,5 +1,5 @@
-﻿using PandemyLagacyDDD.Application.Generic;
-using PandemyLagacyDDD.Domain.Generic;
+﻿using PiguineraArquitecturaHexagonal.Application.Generic;
+using PiguineraArquitecturaHexagonal.Domain.Generic;
 using PiguineraArquitecturaHexagonal.Domain.Model.Supplier.Commands;
 using PiguineraArquitecturaHexagonal.Domain.Model.Supplier.Entities;
 

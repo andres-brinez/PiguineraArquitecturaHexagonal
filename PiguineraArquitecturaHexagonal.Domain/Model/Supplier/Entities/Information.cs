@@ -1,6 +1,7 @@
 ﻿
-using PandemyLagacyDDD.Domain.Generic;
+using PiguineraArquitecturaHexagonal.Domain.Generic;
 using PiguineraArquitecturaHexagonal.Domain.Model.Supplier.Values.Information;
+using PiguineraArquitecturaHexagonal.Domain.Model.Supplier.Values.UserCredential;
 
 namespace PiguineraArquitecturaHexagonal.Domain.Model.Supplier.Entities
 {
@@ -11,6 +12,8 @@ namespace PiguineraArquitecturaHexagonal.Domain.Model.Supplier.Entities
         private Phone PhoneNumber;
         private Seniority Seniority;
         private Status Status;
+        private RegistrationDate RegistrationDate;
+
 
         public Information(InformationId id) : base(id)
         {
@@ -23,6 +26,8 @@ namespace PiguineraArquitecturaHexagonal.Domain.Model.Supplier.Entities
             PhoneNumber = new Phone(numberPhone);
             Seniority = new Seniority(0);
             Status = new Status(false);
+            RegistrationDate = new RegistrationDate();
+
         }
 
         public static Information Of(string name, string address, string numberPhone)
@@ -70,6 +75,11 @@ namespace PiguineraArquitecturaHexagonal.Domain.Model.Supplier.Entities
             
                 Status= new Status(status);  
             
+        }
+
+        public DateTime GetRegistrationDate()
+        {
+            return RegistrationDate.Value();
         }
 
     }

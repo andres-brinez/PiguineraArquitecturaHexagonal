@@ -1,13 +1,16 @@
-﻿using PandemyLagacyDDD.Domain.Generic;
-using PandemyLagacyDDD.Domain.Model.City.Events.Configuration;
+﻿using PiguineraArquitecturaHexagonal.Domain.Generic;
+using PiguineraArquitecturaHexagonal.Domain.Model.City.Events.Configuration;
+
 
 namespace PiguineraArquitecturaHexagonal.Domain.Model.Supplier.Events
 {
     public class CalculatedSeniority : DomainEvent
     {
+        public DateTime registerDate;
 
-        public CalculatedSeniority() : base(EventsEnumSupplier.SUPPLIER_CREATED.ToString())
+        public CalculatedSeniority(DateTime registerDate):base(EventsEnumSupplier.SENIORITY_CALCULTED.ToString(), registerDate.ToString())
         {
+            this.registerDate = registerDate;
         }
     }
 }

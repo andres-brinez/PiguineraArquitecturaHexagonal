@@ -1,4 +1,4 @@
-﻿using PandemyLagacyDDD.Domain.Generic;
+﻿using PiguineraArquitecturaHexagonal.Domain.Generic;
 using System.Security.Cryptography;
 using System.Text;
 
