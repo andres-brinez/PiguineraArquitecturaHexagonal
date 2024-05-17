@@ -26,15 +26,15 @@ namespace PiguineraArquitecturaHexagonal.Domain.Model.Manage.Events
                             decimal discount,
                             double unitPrice
                             ) :
-                            base(EventsEnumManage.BOOK_CREATED.ToString(), 
-                                $"idSupplier:{idSupplier}," +
-                                $"seniority:{seniority}," +
-                                $"title:{title}," +
-                                $"quantity:{quantity}," +
-                                $"bookType:{bookType}," +
-                                $"originalPrice:{originalPrice}," +
-                                $"discount:{discount}," +
-                                $"unitPrice:{unitPrice}")
+                            base(EventsEnumManage.BOOK_CREATED.ToString(),
+                                $"{{\"idSupplier\":'\"{idSupplier}\"',"+
+                                $"\"seniority\":{seniority}," +
+                                $"\"title\":\"{title}\"," +
+                                $"\"quantity\":{quantity}," +
+                                $"\"bookType\":\"{bookType}\"," +
+                                $"\"originalPrice\":{originalPrice}," +
+                                $"\"discount\":{discount}," +
+                                $"\"unitPrice\":{unitPrice}}}")
         {
             IdSupplier = idSupplier;
             this.Seniority = seniority;

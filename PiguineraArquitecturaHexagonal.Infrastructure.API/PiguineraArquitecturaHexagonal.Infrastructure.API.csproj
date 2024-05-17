@@ -17,8 +17,4 @@
     <ProjectReference Include="..\PiguineraArquitecturaHexagonal.Infrastructure.Persistence\PiguineraArquitecturaHexagonal.Infrastructure.Persistence.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="DataTransferObject\Output\" />
-  </ItemGroup>
-
 </Project>
