@@ -1,12 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using MongoDB.Bson.IO;
 using PiguineraArquitecturaHexagonal.Application.Generic;
 using PiguineraArquitecturaHexagonal.Domain.Model.Manage.Commands;
-using Newtonsoft.Json;
 using PiguineraArquitecturaHexagonal.Infrastructure.API.DataTransferObject.Input;
 using PiguineraArquitecturaHexagonal.Domain.Model.Manage.Values.Book;
 using PiguineraArquitecturaHexagonal.Infrastructure.API.DataTransferObject.Output;
-using MongoDB.Bson;
 using PiguineraArquitecturaHexagonal.Infrastructure.API.DataTransferObject.Data;
 
 namespace PiguineraArquitecturaHexagonal.Infrastructure.API.Controllers
@@ -30,21 +27,19 @@ namespace PiguineraArquitecturaHexagonal.Infrastructure.API.Controllers
             try
             {
 
+                var providerEvent = await _repository.GetById(payload.IdProvider);
+                var provideInformation = providerEvent.EventBody;
 
-
-                var result = await _repository.GetById(payload.IdProvider);
-                var eventBody = result.EventBody;
-
-                dynamic userDataJson = Newtonsoft.Json.JsonConvert.DeserializeObject(eventBody);
-                int seniority = userDataJson.seniority;
+                dynamic ProviderDataToJson = Newtonsoft.Json.JsonConvert.DeserializeObject(provideInformation);
+                int seniority = ProviderDataToJson.seniority;
 
                 TypeBook typeBook = (payload.Type == "BOOK") ? TypeBook.BOOK : TypeBook.NOVEL;
                 CreateBookCommand command = new CreateBookCommand(payload.IdProvider, seniority,payload.Title,payload.Quantity,typeBook,payload.OriginalPrice);
                 
-                var @event = await useCase.Execute(command);
+                var eventBook = await useCase.Execute(command);
 
-                BookData bookDataJson = Newtonsoft.Json.JsonConvert.DeserializeObject<BookData>(@event[0].EventBody);
-                BookOutputDTO bookOutput = new(bookDataJson.Title, bookDataJson.BookType, bookDataJson.UnitPrice, bookDataJson.Discount, bookDataJson.Quantity);
+                BookData bookDataToJson = Newtonsoft.Json.JsonConvert.DeserializeObject<BookData>(eventBook[0].EventBody);
+                BookOutputDTO bookOutput = new(bookDataToJson.Title, bookDataToJson.BookType, bookDataToJson.UnitPrice, bookDataToJson.Discount, bookDataToJson.Quantity);
 
                 return new ObjectResult(bookOutput) { StatusCode = StatusCodes.Status200OK };
             }
