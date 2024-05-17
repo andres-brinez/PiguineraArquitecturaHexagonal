@@ -1,6 +1,4 @@
 ﻿using PiguineraArquitecturaHexagonal.Domain.Generic;
-using PiguineraArquitecturaHexagonal.Domain.Model.City.Events.Configuration;
-
 
 namespace PiguineraArquitecturaHexagonal.Domain.Model.Supplier.Events
 {
@@ -11,7 +9,7 @@ namespace PiguineraArquitecturaHexagonal.Domain.Model.Supplier.Events
         public DateTime RegisterDate;
         public int Seniority;
 
-        public CreatedSupplier(string email,string password, DateTime registerDate,int seniority) : base(EventsEnumSupplier.SUPPLIER_CREATED.ToString(), $"email:{email},password:{password},registerDate:{registerDate},seniority:{seniority}")
+        public CreatedSupplier(string email,string password, DateTime registerDate,int seniority) : base(EventsEnumSupplier.SUPPLIER_CREATED.ToString(), $"{{\"email\":\"{email}\",\"password\":\"{password}\",\"registerDate\":\"{registerDate}\",\"seniority\":{seniority}}}")
         {
             Email = email;
             Password = password;

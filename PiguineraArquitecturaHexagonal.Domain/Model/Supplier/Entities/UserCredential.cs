@@ -26,6 +26,11 @@ namespace PiguineraArquitecturaHexagonal.Domain.Model.Supplier.Entities
             return (new UserCredential( email,  password));
         }
 
+        public String GetPassword()
+        {
+            return Password.Value();
+        }
+
         public String GetEmail()
         {
             return Email.Value();

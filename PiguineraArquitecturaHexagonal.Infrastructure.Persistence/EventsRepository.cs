@@ -38,6 +38,18 @@ namespace PiguineraArquitecturaHexagonal.Infrastructure.Persistence
             return await FindByAggregateId(domainEvent.AggregateId);
         }
 
-      
+        public async Task<DomainEvent> GetById(string id)
+        {
+            var @event = await _eventRepository.Find(e => e.UUID == id).FirstOrDefaultAsync();
+
+            if (@event == null)
+                return null;
+
+            return @event;
+        }
+
+
+
+
     }
 }

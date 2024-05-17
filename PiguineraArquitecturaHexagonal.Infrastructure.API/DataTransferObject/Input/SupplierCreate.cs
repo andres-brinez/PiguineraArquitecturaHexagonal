@@ -1,4 +1,4 @@
-﻿namespace PiguineraArquitecturaHexagonal.Api.DataTransferObject
+﻿namespace PiguineraArquitecturaHexagonal.Infrastructure.API.DataTransferObject.Input
 {
     public class SupplierCreate
     {

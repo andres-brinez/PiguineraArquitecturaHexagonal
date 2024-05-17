@@ -1,9 +1,8 @@
 ﻿using PiguineraArquitecturaHexagonal.Domain.Generic;
 using PiguineraArquitecturaHexagonal.Domain.Model.Supplier.Entities;
-using PiguineraArquitecturaHexagonal.Domain.Model.Supplier.Events;
 
 
-namespace PiguineraArquitecturaHexagonal.Domain.Model.City.Events.Configuration
+namespace PiguineraArquitecturaHexagonal.Domain.Model.Supplier.Events
 {
     public class SupplierEventChange : EventChange
     {

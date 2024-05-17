@@ -8,6 +8,7 @@ namespace PiguineraArquitecturaHexagonal.Application.Generic
     public interface IEventsRepository
     {
         Task<List<DomainEvent>> Save(DomainEvent domainEvent);
+        Task<DomainEvent> GetById(string id);
         Task<List<DomainEvent>> FindByAggregateId(string aggregateId);
     }
 }

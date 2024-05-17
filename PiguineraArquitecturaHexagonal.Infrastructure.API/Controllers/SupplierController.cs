@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using PiguineraArquitecturaHexagonal.Application.Generic;
-using PiguineraArquitecturaHexagonal.Api.DataTransferObject;
 using PiguineraArquitecturaHexagonal.Domain.Model.Supplier.Commands;
+using PiguineraArquitecturaHexagonal.Infrastructure.API.DataTransferObject.Input;
 
 namespace PiguineraArquitecturaHexagonal.Infrastructure.API.Controllers
 {
@@ -10,7 +10,7 @@ namespace PiguineraArquitecturaHexagonal.Infrastructure.API.Controllers
     public class SupplierController : Controller
     {
         [HttpPost]
-        [Route("CreayeSuppler")]
+        [Route("CreateSuppler")]
         public async Task<IActionResult> CreateCity([FromBody] SupplierCreate payload, [FromServices] IInitialCommandUseCase<CreateSupplierCommnad> useCase)
         {
             try

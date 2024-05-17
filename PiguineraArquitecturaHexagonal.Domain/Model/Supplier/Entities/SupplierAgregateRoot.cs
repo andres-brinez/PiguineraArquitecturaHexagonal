@@ -1,7 +1,5 @@
 ﻿using PiguineraArquitecturaHexagonal.Domain.Generic;
-using PiguineraArquitecturaHexagonal.Domain.Model.City.Events.Configuration;
 using PiguineraArquitecturaHexagonal.Domain.Model.Supplier.Events;
-using PiguineraArquitecturaHexagonal.Domain.Model.Supplier.Values.Information;
 using PiguineraArquitecturaHexagonal.Domain.Model.Supplier.Values.Supplier;
 
 namespace PiguineraArquitecturaHexagonal.Domain.Model.Supplier.Entities
