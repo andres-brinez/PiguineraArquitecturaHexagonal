@@ -15,6 +15,8 @@ namespace PiguineraArquitecturaHexagonal.Application.UseCases.Manage.Book
         {
             _repository = repository;
         }
+
+        // Puede retornar el libro
         public async Task<List<DomainEvent>> Execute(CalculatePaymentCommand command)
         {
             var manage = new ManageAgregationRoot(command.IdSupplier);
@@ -30,7 +32,5 @@ namespace PiguineraArquitecturaHexagonal.Application.UseCases.Manage.Book
             manage.MarkAsCommitted();
             return domainEvents;
         }
-
-      
     }
 }

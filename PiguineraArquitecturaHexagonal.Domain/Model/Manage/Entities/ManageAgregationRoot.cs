@@ -38,7 +38,8 @@ namespace PiguineraArquitecturaHexagonal.Domain.Model.Manage.Entities
                                         Book.GetBookType(),
                                         Book.GetOriginalPrice(),
                                         Book.GetDiscount(),
-                                        Book.GetUnitPrice()));
+                                        Book.GetUnitPrice(),
+                                        Book.GetTotalPrice()));
         }
 
         public void CalculatPayment ( string supplierId, List<string> booksId, List<Book> books)

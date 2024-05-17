@@ -6,7 +6,6 @@ using PiguineraArquitecturaHexagonal.Domain.Model.Manage.Values.Book;
 using PiguineraArquitecturaHexagonal.Infrastructure.API.DataTransferObject.Output;
 using PiguineraArquitecturaHexagonal.Infrastructure.API.DataTransferObject.Data;
 using PiguineraArquitecturaHexagonal.Domain.Model.Manage.Entities;
-using PiguineraArquitecturaHexagonal.Domain.Model.Supplier.Values.Information;
 
 namespace PiguineraArquitecturaHexagonal.Infrastructure.API.Controllers
 {
@@ -72,7 +71,6 @@ namespace PiguineraArquitecturaHexagonal.Infrastructure.API.Controllers
                     var bookEventInformation = bookEvent.EventBody;
 
                     dynamic BookDataToJson = Newtonsoft.Json.JsonConvert.DeserializeObject(bookEventInformation);
-                    Console.WriteLine(BookDataToJson);
 
                     TypeBook typeBook = (BookDataToJson.BookType == "BOOK") ? TypeBook.BOOK : TypeBook.NOVEL;
 
@@ -83,10 +81,10 @@ namespace PiguineraArquitecturaHexagonal.Infrastructure.API.Controllers
                     int quantity = BookDataToJson.quantity;
                     int unitPrice = BookDataToJson.unitPrice;
 
-
-
                     Book book = new Book(payload.IdSupplier, discount, title, informationBook.Quantity, typeBook, unitPrice, "hola");
 
+                    //Console.WriteLine(book.ToString());
+                    books.Add(book);
                 }
 
 
@@ -97,7 +95,7 @@ namespace PiguineraArquitecturaHexagonal.Infrastructure.API.Controllers
                 //BookData bookDataToJson = Newtonsoft.Json.JsonConvert.DeserializeObject<BookData>(eventBook[0].EventBody);
                 //BookOutputDTO bookOutput = new(bookDataToJson.Title, bookDataToJson.BookType, bookDataToJson.UnitPrice, bookDataToJson.Discount, bookDataToJson.Quantity);
 
-                return new ObjectResult(books[0]) { StatusCode = StatusCodes.Status200OK };
+                return new ObjectResult(idBook) { StatusCode = StatusCodes.Status200OK };
             }
             catch (Exception ex)
             {

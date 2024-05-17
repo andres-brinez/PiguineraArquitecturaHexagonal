@@ -34,7 +34,6 @@ namespace PiguineraArquitecturaHexagonal.Domain.Model.Manage.Entities
             Quantity =new Quantity(quantity);
             BookType =new BookType(bookType);
             OriginalPrice =new OriginalPrice(originalPrice);
-
             _discountStrategies = new List<IDiscountStrategy>
             {
                 new SeniorityOneTwoDiscountStrategy(),
@@ -43,6 +42,9 @@ namespace PiguineraArquitecturaHexagonal.Domain.Model.Manage.Entities
 
             CalculateDiscountSeniority();
             CalculateUnitPrice();
+
+            double totalPrice = System.Math.Round(UnitPrice.Value() * Quantity.Value(), 2);
+            _TotalPrice = new Values.Book.TotalPrice(totalPrice);
         }
 
 
@@ -54,8 +56,10 @@ namespace PiguineraArquitecturaHexagonal.Domain.Model.Manage.Entities
             Quantity = new Quantity(quantity);
             BookType = new BookType(bookType);
             UnitPrice = new UnitPrice(unitPrice);
-            Console.WriteLine("Hpla desde el constructor");
-            
+
+            double totalPrice = System.Math.Round(UnitPrice.Value() * Quantity.Value(), 2);
+            _TotalPrice = new Values.Book.TotalPrice(totalPrice);
+
         }
 
         public int GetSeniority()
@@ -92,6 +96,10 @@ namespace PiguineraArquitecturaHexagonal.Domain.Model.Manage.Entities
         public double GetUnitPrice() 
         {
             return UnitPrice.Value(); 
+        }
+        public double GetTotalPrice()
+        {
+            return _TotalPrice.Value();
         }
 
         public void CalculateDiscountSeniority()
@@ -156,8 +164,9 @@ namespace PiguineraArquitecturaHexagonal.Domain.Model.Manage.Entities
                  $"\"Quantity\":{Quantity.Value()}," +
                  $"\"BookType\":\"{BookType.Value().ToString()}\"," +
                  //$"\"OriginalPrice\":{OriginalPrice}," +
-                 $"\"Discount\":{Discount}," +
-                 $"\"UnitPrice\":{UnitPrice.Value()}}}"; 
+                 $"\"Discount\":{Discount.Value()}," +
+                 $"\"UnitPrice\":{UnitPrice.Value()}" +
+                 $"\"TotalPrice\":{_TotalPrice.Value()}," +"}}"; 
         }
 
 

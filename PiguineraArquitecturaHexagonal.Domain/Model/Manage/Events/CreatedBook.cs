@@ -14,6 +14,9 @@ namespace PiguineraArquitecturaHexagonal.Domain.Model.Manage.Events
         public int OriginalPrice;
         public decimal Discount;
         public double UnitPrice;
+        public double TotalPrice;
+
+
 
 
         public CreatedBook( 
@@ -24,7 +27,8 @@ namespace PiguineraArquitecturaHexagonal.Domain.Model.Manage.Events
                             TypeBook bookType,
                             int originalPrice,
                             decimal discount,
-                            double unitPrice
+                            double unitPrice,
+                            double totalPrice
                             ) :
                             base(EventsEnumManage.BOOK_CREATED.ToString(),
                                 $"{{\"idSupplier\":'\"{idSupplier}\"',"+
@@ -34,7 +38,8 @@ namespace PiguineraArquitecturaHexagonal.Domain.Model.Manage.Events
                                 $"\"bookType\":\"{bookType}\"," +
                                 $"\"originalPrice\":{originalPrice}," +
                                 $"\"discount\":{discount}," +
-                                $"\"unitPrice\":{unitPrice}}}")
+                                $"\"unitPrice\":{unitPrice}," +
+                                $"\"totalPrice\":{totalPrice}}}")
         {
             IdSupplier = idSupplier;
             this.Seniority = seniority;
@@ -44,6 +49,7 @@ namespace PiguineraArquitecturaHexagonal.Domain.Model.Manage.Events
             OriginalPrice = originalPrice;
             Discount = discount;
             UnitPrice = unitPrice;
+            TotalPrice = totalPrice;
         }
     }
 }
