@@ -1,5 +1,6 @@
 ﻿using PiguineraArquitecturaHexagonal.Domain.Generic;
 using PiguineraArquitecturaHexagonal.Domain.Model.Manage.Values.Book;
+using PiguineraArquitecturaHexagonal.Domain.Model.Manage.Values.Purchese;
 using PiguineraArquitecturaHexagonal.Domain.Model.Strategy;
 using PiguineraArquitecturaHexagonal.Domain.Model.Supplier.Values.Information;
 using PiguineraArquitecturaHexagonal.Domain.Model.Supplier.Values.Supplier;
@@ -18,6 +19,8 @@ namespace PiguineraArquitecturaHexagonal.Domain.Model.Manage.Entities
         private OriginalPrice OriginalPrice;
         private Discount Discount;
         private UnitPrice UnitPrice;
+        private Values.Book.TotalPrice _TotalPrice;
+
 
         public Book(BookId id) : base(id)
         {
@@ -39,10 +42,22 @@ namespace PiguineraArquitecturaHexagonal.Domain.Model.Manage.Entities
             };
 
             CalculateDiscountSeniority();
-            CalculateTotalPrice();
+            CalculateUnitPrice();
         }
 
-      
+
+        public Book (string idProvider, decimal discount, string title, int quantity, TypeBook bookType, int unitPrice,string text) : base(new BookId())
+        {
+            IdSupplier = new SupplierId(idProvider);
+            Discount = new Discount(discount);
+            Title = new Title(title);
+            Quantity = new Quantity(quantity);
+            BookType = new BookType(bookType);
+            UnitPrice = new UnitPrice(unitPrice);
+            Console.WriteLine("Hpla desde el constructor");
+            
+        }
+
         public int GetSeniority()
         {
             return Seniority.Value();
@@ -96,7 +111,7 @@ namespace PiguineraArquitecturaHexagonal.Domain.Model.Manage.Entities
             }
         }
 
-        public void CalculateTotalPrice()
+        public void CalculateUnitPrice()
         {
 
             if (BookType.Value()== TypeBook.BOOK)
@@ -125,6 +140,26 @@ namespace PiguineraArquitecturaHexagonal.Domain.Model.Manage.Entities
                 this.UnitPrice = new UnitPrice(currentPrice);
             }
         }
+
+
+        public void CalculaTotalPrice()
+        {
+            _TotalPrice = new Values.Book.TotalPrice((double)System.Math.Round(UnitPrice.Value() * Quantity.Value(), 2));
+
+        }
+        public override string ToString()
+        {
+            return 
+                 $"{{\"IdSupplier\":\"{IdSupplier.Value()}\"," +
+                 //$"\"Seniority\":\"{Seniority.Value()}\"," +
+                 $"\"Title\":\"{Title.Value()}\"," +
+                 $"\"Quantity\":{Quantity.Value()}," +
+                 $"\"BookType\":\"{BookType.Value().ToString()}\"," +
+                 //$"\"OriginalPrice\":{OriginalPrice}," +
+                 $"\"Discount\":{Discount}," +
+                 $"\"UnitPrice\":{UnitPrice.Value()}}}"; 
+        }
+
 
 
 

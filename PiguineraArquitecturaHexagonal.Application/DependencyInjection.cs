@@ -15,7 +15,7 @@ namespace PiguineraArquitecturaHexagonal.Application
         {
             services.AddScoped<IInitialCommandUseCase<CreateSupplierCommnad>, CreateSupplierUseCase>();
             services.AddScoped<IInitialCommandUseCase<CreateBookCommand>, CreateBookUseCase>();
-
+            services.AddScoped<IInitialCommandUseCase<CalculatePaymentCommand>, CalculatePaymentUseCase>();
             //services.AddTransient<ICommandUseCase<AddDiseaseCubeCommand, CytyId>, AddDiseaseCubeUseCase>();
             return services;
         }

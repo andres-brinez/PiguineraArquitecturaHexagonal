@@ -2,9 +2,8 @@
 {
     public enum EventsEnumManage
     {
-
         BOOK_CREATED,
-
+        CALCULATEDPAYMENT
 
     }
 }

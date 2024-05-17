@@ -1,9 +1,5 @@
 ﻿using PiguineraArquitecturaHexagonal.Domain.Generic;
 using PiguineraArquitecturaHexagonal.Domain.Model.Manage.Entities;
-using PiguineraArquitecturaHexagonal.Domain.Model.Manage.Values.Book;
-using PiguineraArquitecturaHexagonal.Domain.Model.Supplier.Entities;
-using PiguineraArquitecturaHexagonal.Domain.Model.Supplier.Events;
-using System.Linq.Expressions;
 
 
 namespace PiguineraArquitecturaHexagonal.Domain.Model.Manage.Events.Configuration
@@ -39,6 +35,17 @@ namespace PiguineraArquitecturaHexagonal.Domain.Model.Manage.Events.Configuratio
             //    supplier.Information.CalculateSeniority(domainEvent.registerDate);
 
             //});
+
+            AddSub((DomainEvent @event) =>
+            {
+                if (@event is not CalculatedPayment) return;
+                if (@event is not CalculatedPayment) return;
+                var domainEvent = (CalculatedPayment)@event;
+
+                manage.Purchese = new Purchese(domainEvent.Books);
+
+
+            });
 
         }
     }

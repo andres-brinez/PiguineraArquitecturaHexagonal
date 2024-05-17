@@ -3,7 +3,6 @@ using PiguineraArquitecturaHexagonal.Domain.Model.Manage.Events;
 using PiguineraArquitecturaHexagonal.Domain.Model.Manage.Events.Configuration;
 using PiguineraArquitecturaHexagonal.Domain.Model.Manage.Values.Book;
 using PiguineraArquitecturaHexagonal.Domain.Model.Manage.Values.Manage;
-using PiguineraArquitecturaHexagonal.Domain.Model.Supplier.Events;
 using PiguineraArquitecturaHexagonal.Domain.Model.Supplier.Values.Supplier;
 
 
@@ -14,6 +13,7 @@ namespace PiguineraArquitecturaHexagonal.Domain.Model.Manage.Entities
 
         public SupplierId SupplierId;
         public Book Book;
+        public Purchese Purchese;
 
         public ManageAgregationRoot(ManageId identity) : base(identity)
         {
@@ -39,6 +39,20 @@ namespace PiguineraArquitecturaHexagonal.Domain.Model.Manage.Entities
                                         Book.GetOriginalPrice(),
                                         Book.GetDiscount(),
                                         Book.GetUnitPrice()));
+        }
+
+        public void CalculatPayment ( string supplierId, List<string> booksId, List<Book> books)
+        {
+            Purchese purchese = new Purchese(books);
+
+            AppendEvent(new CalculatedPayment( supplierId,
+                                               booksId,
+                                               books,
+                                               purchese.GetTotalPrice(),
+                                               purchese.GetTypePurchase(),
+                                               purchese.GetQuantityBook()
+                                              ));
+
         }
 
 
