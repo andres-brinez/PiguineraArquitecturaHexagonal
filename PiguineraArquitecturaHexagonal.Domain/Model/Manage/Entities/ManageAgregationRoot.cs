@@ -39,9 +39,7 @@ namespace PiguineraArquitecturaHexagonal.Domain.Model.Manage.Entities
                                         Book.GetOriginalPrice(),
                                         Book.GetDiscount(),
                                         Book.GetUnitPrice()));
-
         }
-
 
 
     }

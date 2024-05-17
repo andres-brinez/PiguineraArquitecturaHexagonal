@@ -1,4 +1,5 @@
-﻿using PiguineraArquitecturaHexagonal.Domain.Generic;
+﻿
+using PiguineraArquitecturaHexagonal.Domain.Generic;
 using PiguineraArquitecturaHexagonal.Domain.Model.Supplier.Events;
 using PiguineraArquitecturaHexagonal.Domain.Model.Supplier.Values.Supplier;
 
