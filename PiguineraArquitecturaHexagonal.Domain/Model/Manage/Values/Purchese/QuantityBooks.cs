@@ -3,11 +3,11 @@ using PiguineraArquitecturaHexagonal.Domain.Generic;
 
 namespace PiguineraArquitecturaHexagonal.Domain.Model.Manage.Values.Purchese
 {
-    public class QuantityBook : IValueObject<int>
+    public class QuantityBooks : IValueObject<int>
     {
         private readonly int quantity;
 
-        public QuantityBook(List<Entities.Book> books)
+        public QuantityBooks(List<Entities.Book> books)
         {
             if (books == null)
             {
@@ -18,9 +18,9 @@ namespace PiguineraArquitecturaHexagonal.Domain.Model.Manage.Values.Purchese
 
         }
 
-        public static QuantityBook Of(List<Entities.Book> books)
+        public static QuantityBooks Of(List<Entities.Book> books)
         {
-            return new QuantityBook(books);
+            return new QuantityBooks(books);
         }
 
         public int Value()

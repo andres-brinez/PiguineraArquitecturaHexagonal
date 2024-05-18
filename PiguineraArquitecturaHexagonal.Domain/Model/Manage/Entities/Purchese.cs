@@ -10,7 +10,7 @@ namespace PiguineraArquitecturaHexagonal.Domain.Model.Manage.Entities
 
         private List<Book> Books;
         private Values.Purchese.TotalPrice TotalPrice;
-        private QuantityBook QuantityBook;
+        private QuantityBooks QuantityBooks;
         private TypePurchase TypePurchase;
 
 
@@ -23,8 +23,8 @@ namespace PiguineraArquitecturaHexagonal.Domain.Model.Manage.Entities
             Books = books;
 
             TotalPrice= new Values.Purchese.TotalPrice(Books);
-            QuantityBook = new QuantityBook(Books);
-            TypePurchase = new TypePurchase(QuantityBook.Value());
+            QuantityBooks = new QuantityBooks(Books);
+            TypePurchase = new TypePurchase(QuantityBooks.Value());
             CalculatePurcheseValue(books);
 
 
@@ -42,7 +42,7 @@ namespace PiguineraArquitecturaHexagonal.Domain.Model.Manage.Entities
 
         public int GetQuantityBook()
         {
-            return QuantityBook.Value(); 
+            return QuantityBooks.Value(); 
         }
 
         public String GetTypePurchase()
@@ -119,7 +119,7 @@ namespace PiguineraArquitecturaHexagonal.Domain.Model.Manage.Entities
         {
             return $"Books: {string.Join(", ", Books.Select(b => b.ToString()))}, " +
                    $"Total Price: {TotalPrice.Value}, " +
-                   $"Quantity: {QuantityBook.Value}, " +
+                   $"Quantity: {QuantityBooks.Value}, " +
                    $"Type Purchase: {TypePurchase.Value}";
         }
 
