@@ -6,7 +6,6 @@ using PiguineraArquitecturaHexagonal.Domain.Model.Manage.Values.Book;
 using PiguineraArquitecturaHexagonal.Infrastructure.API.DataTransferObject.Output;
 using PiguineraArquitecturaHexagonal.Infrastructure.API.DataTransferObject.Data;
 using PiguineraArquitecturaHexagonal.Domain.Model.Manage.Entities;
-using PiguineraArquitecturaHexagonal.Application.UseCases.Manage.Book;
 
 namespace PiguineraArquitecturaHexagonal.Infrastructure.API.Controllers
 {
@@ -108,5 +107,54 @@ namespace PiguineraArquitecturaHexagonal.Infrastructure.API.Controllers
                 return new ObjectResult(ex.Message) { StatusCode = StatusCodes.Status400BadRequest };
             }
         }
+
+        [HttpPost]
+        [Route("CalculateBooksBudget")]
+        public async Task<IActionResult> CalculateTotalPriceBookBudget([FromBody] BudgetInputDTO payload, [FromServices] IInitialCommandUseCase<CalculatePaymentCommand> useCase)
+        {
+            try
+            {
+
+                var books = new List<Book>();
+
+
+                foreach (var idBook in payload.IdBooks)
+                {
+
+                    var bookEvent = await _repository.GetById(idBook);
+
+                    var bookEventInformation = bookEvent.EventBody;
+
+                    dynamic BookDataToJson = Newtonsoft.Json.JsonConvert.DeserializeObject(bookEventInformation);
+
+                    TypeBook typeBook = BookDataToJson.bookType == "BOOK" ? TypeBook.BOOK : TypeBook.NOVEL;
+
+                    Book book = new Book((string)BookDataToJson.idSupplier,
+                                          (decimal)BookDataToJson.discount,
+                                          (string)BookDataToJson.title,
+                                          1,
+                                          typeBook,
+                                          (int)BookDataToJson.unitPrice, ""
+                                        );
+
+                    books.Add(book);
+                }
+
+
+                //CalculatePaymentCommand command = new CalculatePaymentCommand(payload.IdSupplier, booksId, books);
+
+                //var eventBook = await useCase.Execute(command);
+                //PurcheseOutputDTO bookDataToJson = Newtonsoft.Json.JsonConvert.DeserializeObject<PurcheseOutputDTO>(eventBook[0].EventBody);
+
+                return new ObjectResult(books.Select(book => book.ToString())) { StatusCode = StatusCodes.Status200OK };
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error");
+
+                return new ObjectResult(ex.Message) { StatusCode = StatusCodes.Status400BadRequest };
+            }
+        }
+
     }
 }
