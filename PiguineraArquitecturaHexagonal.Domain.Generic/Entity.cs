@@ -16,10 +16,10 @@ namespace PiguineraArquitecturaHexagonal.Domain.Generic
             return Id;
         }
 
-        public override bool Equals(object? obj)
-        {
-            return Id.Equals(obj);
-        }
+        //public override bool Equals(object? obj)
+        //{
+        //    return Id.Equals(obj);
+        //}
 
         public override int GetHashCode()
         {

@@ -45,10 +45,9 @@ namespace PiguineraArquitecturaHexagonal.Domain.Model.Manage.Entities
         public void CalculatPayment ( string supplierId, List<string> booksId, List<Book> books)
         {
             Purchese purchese = new Purchese(books);
-
             AppendEvent(new CalculatedPayment( supplierId,
                                                booksId,
-                                               books,
+                                               purchese.GetBooks(),
                                                purchese.GetTotalPrice(),
                                                purchese.GetTypePurchase(),
                                                purchese.GetQuantityBook()

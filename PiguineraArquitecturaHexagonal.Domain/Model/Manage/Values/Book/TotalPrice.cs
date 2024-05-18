@@ -10,9 +10,9 @@ namespace PiguineraArquitecturaHexagonal.Domain.Model.Manage.Values.Book
 
         public TotalPrice(double price)
         {
-            if (price <= 0)
+            if (price < 0)
             {
-                throw new ArgumentOutOfRangeException(nameof(price), "El precio  debe ser mayor que 0.");
+                throw new ArgumentOutOfRangeException(nameof(price), "El precio  no debe ser menor a 0.");
             }
 
             _price = price;

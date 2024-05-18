@@ -1,25 +1,29 @@
 ﻿using PiguineraArquitecturaHexagonal.Domain.Generic;
 using PiguineraArquitecturaHexagonal.Domain.Model.Manage.Values.Book;
-using PiguineraArquitecturaHexagonal.Domain.Model.Manage.Values.Purchese;
 using PiguineraArquitecturaHexagonal.Domain.Model.Strategy;
 using PiguineraArquitecturaHexagonal.Domain.Model.Supplier.Values.Information;
 using PiguineraArquitecturaHexagonal.Domain.Model.Supplier.Values.Supplier;
+using System.Text.Json.Serialization;
 
 namespace PiguineraArquitecturaHexagonal.Domain.Model.Manage.Entities
 {
-    public  class Book : Entity<BookId>
+    public  class Book : Entity<BookId>,ICloneable
     {
+
+        [JsonIgnore]
+        public BookId Id { get; set; }
+            
         private readonly List<IDiscountStrategy> _discountStrategies = new List<IDiscountStrategy>();
 
-        private SupplierId IdSupplier;
-        private Seniority Seniority;
-        private Title Title;
-        private Quantity Quantity;
-        private BookType BookType;
-        private OriginalPrice OriginalPrice;
-        private Discount Discount;
-        private UnitPrice UnitPrice;
-        private Values.Book.TotalPrice _TotalPrice;
+        public SupplierId IdSupplier;
+        public Seniority Seniority;
+        public Title Title;
+        public Quantity Quantity;
+        public BookType BookType;
+        public OriginalPrice OriginalPrice;
+        public Discount Discount;
+        public UnitPrice UnitPrice;
+        public Values.Book.TotalPrice _TotalPrice;
 
 
         public Book(BookId id) : base(id)
@@ -61,6 +65,27 @@ namespace PiguineraArquitecturaHexagonal.Domain.Model.Manage.Entities
             _TotalPrice = new Values.Book.TotalPrice(totalPrice);
 
         }
+
+
+        public object Clone()
+        {
+            // Crear una nueva instancia de Book
+            Book clone = new Book(this.Id);
+
+            clone.IdSupplier = this.IdSupplier;
+            clone.Seniority = this.Seniority;
+            clone.Title = this.Title;
+            clone.Quantity = this.Quantity;
+            clone.BookType = this.BookType;
+            clone.OriginalPrice = this.OriginalPrice;
+            clone.Discount = this.Discount;
+            clone.UnitPrice = this.UnitPrice;
+            clone._TotalPrice = this._TotalPrice;
+
+            return clone;
+        }
+
+       
 
         public int GetSeniority()
         {
@@ -152,7 +177,8 @@ namespace PiguineraArquitecturaHexagonal.Domain.Model.Manage.Entities
 
         public void CalculaTotalPrice()
         {
-            _TotalPrice = new Values.Book.TotalPrice((double)System.Math.Round(UnitPrice.Value() * Quantity.Value(), 2));
+            var newPrice = new Values.Book.TotalPrice((double)System.Math.Round(UnitPrice.Value() * Quantity.Value(), 2));
+            _TotalPrice = newPrice;
 
         }
         public override string ToString()
@@ -165,12 +191,10 @@ namespace PiguineraArquitecturaHexagonal.Domain.Model.Manage.Entities
                  $"\"BookType\":\"{BookType.Value().ToString()}\"," +
                  //$"\"OriginalPrice\":{OriginalPrice}," +
                  $"\"Discount\":{Discount.Value()}," +
-                 $"\"UnitPrice\":{UnitPrice.Value()}" +
-                 $"\"TotalPrice\":{_TotalPrice.Value()}," +"}}"; 
+                 $"\"UnitPrice\":{UnitPrice.Value()}," +
+                 $"\"TotalPrice\":{_TotalPrice.Value()}," +"}"; 
         }
 
-
-
-
+       
     }
 }

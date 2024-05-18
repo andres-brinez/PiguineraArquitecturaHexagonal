@@ -9,9 +9,9 @@ namespace PiguineraArquitecturaHexagonal.Domain.Model.Manage.Values.Book
 
         public Quantity(int quantity)
         {
-            if (quantity <= 0)
+            if (quantity < 0)
             {
-                throw new ArgumentOutOfRangeException(nameof(quantity), "La cantidad debe ser mayor que 0.");
+                throw new ArgumentOutOfRangeException(nameof(quantity), "La cantidad  no debe ser menor que 0.");
             }
 
             _quantity = quantity;

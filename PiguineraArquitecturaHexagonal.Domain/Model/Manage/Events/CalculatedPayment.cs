@@ -1,4 +1,6 @@
 ﻿
+using Newtonsoft.Json;
+
 using PiguineraArquitecturaHexagonal.Domain.Generic;
 using PiguineraArquitecturaHexagonal.Domain.Model.Manage.Entities;
 using PiguineraArquitecturaHexagonal.Domain.Model.Manage.Events.Configuration;
@@ -25,7 +27,9 @@ namespace PiguineraArquitecturaHexagonal.Domain.Model.Manage.Events
                                 ) :
                                     base(EventsEnumManage.CALCULATEDPAYMENT.ToString(),
                                          $"{{\"IdSupplier\":\"{idSupplier}\"," +
-                                         $"\"Book\":\"{booksId}\"," +
+                                           //$"\"Books\":\"{JsonConvert.SerializeObject(books)}\"," +
+                                           $"\"Books\":[{string.Join(",", books.Select(book => book.ToString()))}]," +
+
                                          $"\"totalPrice\":\"{totalPrice}\"," +
                                          $"\"typePurchase\":\"{typePurchase}\"," +
                                          $"\"quantityBooks\":{quantityBooks}}}"
@@ -38,6 +42,8 @@ namespace PiguineraArquitecturaHexagonal.Domain.Model.Manage.Events
             TotalPrice = totalPrice;
             TypePurchase = typePurchase;
             QuantityBooks = quantityBooks;
+
+
         }
     }
 

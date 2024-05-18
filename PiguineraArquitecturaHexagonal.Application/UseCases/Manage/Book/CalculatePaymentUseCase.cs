@@ -32,5 +32,7 @@ namespace PiguineraArquitecturaHexagonal.Application.UseCases.Manage.Book
             manage.MarkAsCommitted();
             return domainEvents;
         }
+
+        
     }
 }

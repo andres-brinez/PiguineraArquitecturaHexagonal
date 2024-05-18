@@ -1,9 +1,13 @@
 ﻿
 
+using System.Text.Json.Serialization;
+
 namespace PiguineraArquitecturaHexagonal.Domain.Generic
 {
     public class Identity : IValueObject<string>
     {
+//        [JsonIgnore]
+
         public readonly string Uuid;
 
 
