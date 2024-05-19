@@ -12,7 +12,7 @@ namespace PiguineraArquitecturaHexagonal.Infrastructure.API.Controllers
     {
         [HttpPost]
         [Route("CreateSuppler")]
-        public async Task<IActionResult> CreateCity([FromBody] SupplierCreate payload, [FromServices] IInitialCommandUseCase<CreateSupplierCommnad> useCase)
+        public async Task<IActionResult> CreateSuppler([FromBody] SupplierCreate payload, [FromServices] IInitialCommandUseCase<CreateSupplierCommnad> useCase)
         {
             try
             {
