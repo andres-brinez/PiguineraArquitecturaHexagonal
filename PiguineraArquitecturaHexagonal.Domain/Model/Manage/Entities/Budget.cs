@@ -50,7 +50,6 @@ namespace PiguineraArquitecturaHexagonal.Domain.Model.Manage.Entities
         private List<Book> SelectBooksWithinBudget(List<Book> books,  double totalBudgetAvailable)
         {
 
-            Console.WriteLine(totalBudgetAvailable);
 
             List<Book> booksAvailable = new List<Book>();
             List<Book> booksPurchese = new List<Book>();

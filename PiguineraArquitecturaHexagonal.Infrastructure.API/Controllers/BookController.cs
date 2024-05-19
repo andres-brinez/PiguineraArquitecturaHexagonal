@@ -120,7 +120,6 @@ namespace PiguineraArquitecturaHexagonal.Infrastructure.API.Controllers
 
                 var books = new List<Book>();
 
-
                 foreach (var idBook in payload.IdBooks)
                 {
 
@@ -147,6 +146,7 @@ namespace PiguineraArquitecturaHexagonal.Infrastructure.API.Controllers
                 CalculateBudgetCommand command = new CalculateBudgetCommand(payload.IdSupplier,books, payload.Budget);
 
                 var eventBook = await useCase.Execute(command);
+
                 BudgetOutputDTO bookDataToJson = Newtonsoft.Json.JsonConvert.DeserializeObject<BudgetOutputDTO>(eventBook[0].EventBody);
 
                 return new ObjectResult(bookDataToJson) { StatusCode = StatusCodes.Status200OK };
@@ -202,7 +202,7 @@ namespace PiguineraArquitecturaHexagonal.Infrastructure.API.Controllers
                 CalculateQuoteCommand command = new CalculateQuoteCommand(payload.IdSupplier, groupBooks);
 
                 var eventBook = await useCase.Execute(command);
-       
+
                 string formattedJson = JToken.Parse(eventBook[0].EventBody).ToString(Formatting.Indented);
 
                 return new ObjectResult(formattedJson) { StatusCode = StatusCodes.Status200OK };

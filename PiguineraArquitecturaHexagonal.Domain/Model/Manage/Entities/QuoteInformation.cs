@@ -50,7 +50,6 @@ namespace PiguineraArquitecturaHexagonal.Domain.Model.Manage.Entities
                                             
         public override string ToString()
         {
-            int num = 0;
             return
                  $"[{string.Join(", ", Books.Select(b => b.ToString()))}, " +
                  $"{{\"Quantity\":{QuantityBooks.Value()}," +

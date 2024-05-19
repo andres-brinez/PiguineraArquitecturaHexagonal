@@ -3,12 +3,12 @@
     public class BudgetOutputDTO
     {
 
-        public List<BookDataPurchese> Books { get; set; }
+        public List<BookDataPurchese> QuotesInformation { get; set; }
         public string BudgetValueFinal { get; set; }
 
         public BudgetOutputDTO(List<BookDataPurchese> books, string budgetValueFinal)
         {
-            Books = books;
+            QuotesInformation = books;
             BudgetValueFinal = budgetValueFinal;
         }
 
