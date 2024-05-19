@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using PiguineraArquitecturaHexagonal.Application.Generic;
+using PiguineraArquitecturaHexagonal.Domain.Model.Manage.Values.Book;
 using PiguineraArquitecturaHexagonal.Domain.Model.Supplier.Commands;
 using PiguineraArquitecturaHexagonal.Infrastructure.API.DataTransferObject.Input;
 
@@ -17,10 +18,16 @@ namespace PiguineraArquitecturaHexagonal.Infrastructure.API.Controllers
             {
 
                 CreateSupplierCommnad command = new CreateSupplierCommnad(payload.Email,payload.Password);
-                Console.WriteLine(payload.Email);
-                var result = await useCase.Execute(command);
 
-                return new ObjectResult(result) { StatusCode = StatusCodes.Status200OK };
+                var eventResult = await useCase.Execute(command);
+
+                dynamic userRegister = Newtonsoft.Json.JsonConvert.DeserializeObject(eventResult[0].EventBody);
+
+                if(userRegister.registerDate!=null) {
+                    return new ObjectResult($"Usuario {userRegister.email} registrado correctamente") { StatusCode = StatusCodes.Status200OK };
+                }
+
+                return new ObjectResult("Error al registrar el usuario") { StatusCode = StatusCodes.Status400BadRequest };
             }
             catch (Exception ex)
             {
