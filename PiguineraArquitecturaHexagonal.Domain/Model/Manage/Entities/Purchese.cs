@@ -20,12 +20,12 @@ namespace PiguineraArquitecturaHexagonal.Domain.Model.Manage.Entities
 
         public Purchese(List<Book> books) : base(new PurchaseId())
         {
-            Books = books;
+            //Books = books;
 
-            TotalPrice= new Values.Purchese.TotalPrice(Books);
-            QuantityBooks = new QuantityBooks(Books);
+            TotalPrice= new Values.Purchese.TotalPrice(books);
+            QuantityBooks = new QuantityBooks(books);
             TypePurchase = new TypePurchase(QuantityBooks.Value());
-            CalculatePurcheseValue(books);
+            Books= CalculatePurcheseValue(books);
 
 
         }
@@ -51,7 +51,7 @@ namespace PiguineraArquitecturaHexagonal.Domain.Model.Manage.Entities
         }
 
         // Calcula el valor de compra de una lista de libros (List<Book>), aplicando diferentes estrategias de precios según la cantidad de cada libro.
-        public void CalculatePurcheseValue(List<Book> books)
+        public static List<Book> CalculatePurcheseValue(List<Book> books)
         {
             int countBooks = 0;
             List<Book> booksResult = new List<Book>();
@@ -91,8 +91,9 @@ namespace PiguineraArquitecturaHexagonal.Domain.Model.Manage.Entities
                 if (retailBook.GetQuantity() > 0) booksResult.Add(retailBook);
                 if (bulkBook.GetQuantity() > 0) booksResult.Add(bulkBook);
 
-                this.Books = booksResult;
             }
+
+            return booksResult;
 
         }
        

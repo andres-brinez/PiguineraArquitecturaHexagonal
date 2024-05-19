@@ -183,8 +183,9 @@ namespace PiguineraArquitecturaHexagonal.Domain.Model.Manage.Entities
         }
         public override string ToString()
         {
-            return 
-                 $"{{\"IdSupplier\":\"{IdSupplier.Value()}\"," +
+            return
+                 $"{{\"IdSupplier\":{IdSupplier.Value()}," +
+                 //$"{{\"IdSupplier\":\"{IdSupplier.Value()}\"," +
                  //$"\"Seniority\":\"{Seniority.Value()}\"," +
                  $"\"Title\":\"{Title.Value()}\"," +
                  $"\"Quantity\":{Quantity.Value()}," +

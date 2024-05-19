@@ -110,7 +110,7 @@ namespace PiguineraArquitecturaHexagonal.Infrastructure.API.Controllers
 
         [HttpPost]
         [Route("CalculateBooksBudget")]
-        public async Task<IActionResult> CalculateTotalPriceBookBudget([FromBody] BudgetInputDTO payload, [FromServices] IInitialCommandUseCase<CalculatePaymentCommand> useCase)
+        public async Task<IActionResult> CalculateTotalPriceBookBudget([FromBody] BudgetInputDTO payload, [FromServices] IInitialCommandUseCase<CalculateBudgetCommand> useCase)
         {
             try
             {
@@ -141,12 +141,12 @@ namespace PiguineraArquitecturaHexagonal.Infrastructure.API.Controllers
                 }
 
 
-                //CalculatePaymentCommand command = new CalculatePaymentCommand(payload.IdSupplier, booksId, books);
+                CalculateBudgetCommand command = new CalculateBudgetCommand(payload.IdSupplier,books, payload.Budget);
 
-                //var eventBook = await useCase.Execute(command);
-                //PurcheseOutputDTO bookDataToJson = Newtonsoft.Json.JsonConvert.DeserializeObject<PurcheseOutputDTO>(eventBook[0].EventBody);
+                var eventBook = await useCase.Execute(command);
+                BudgetOutputDTO bookDataToJson = Newtonsoft.Json.JsonConvert.DeserializeObject<BudgetOutputDTO>(eventBook[0].EventBody);
 
-                return new ObjectResult(books.Select(book => book.ToString())) { StatusCode = StatusCodes.Status200OK };
+                return new ObjectResult(bookDataToJson) { StatusCode = StatusCodes.Status200OK };
             }
             catch (Exception ex)
             {

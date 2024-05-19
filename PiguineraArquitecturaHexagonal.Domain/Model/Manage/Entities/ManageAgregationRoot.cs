@@ -14,6 +14,7 @@ namespace PiguineraArquitecturaHexagonal.Domain.Model.Manage.Entities
         public SupplierId SupplierId;
         public Book Book;
         public Purchese Purchese;
+        public Budget Budget;
 
         public ManageAgregationRoot(ManageId identity) : base(identity)
         {
@@ -54,6 +55,18 @@ namespace PiguineraArquitecturaHexagonal.Domain.Model.Manage.Entities
                                               ));
 
         }
+
+
+        public void CalculateBudget(string supplierId,List<Book> books, decimal budgetValue, decimal budgetValueFinal)
+        {
+            AppendEvent(new CalculatedBudget(supplierId,
+                                               books,
+                                               budgetValue,
+                                               budgetValueFinal
+                                              ));
+
+        }
+
 
 
     }
