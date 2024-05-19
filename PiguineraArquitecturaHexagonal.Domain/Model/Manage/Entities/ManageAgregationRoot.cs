@@ -15,6 +15,7 @@ namespace PiguineraArquitecturaHexagonal.Domain.Model.Manage.Entities
         public Book Book;
         public Purchese Purchese;
         public Budget Budget;
+        public Quote Quote;
 
         public ManageAgregationRoot(ManageId identity) : base(identity)
         {
@@ -63,6 +64,16 @@ namespace PiguineraArquitecturaHexagonal.Domain.Model.Manage.Entities
                                                books,
                                                budgetValue,
                                                budgetValueFinal
+                                              ));
+
+        }
+
+        public void CalculateQuote(string supplierId, List<QuoteInformation> quotesInformation, List<List<Book>> books,float totalPrice)
+        {
+            AppendEvent(new CalculatedQuote(supplierId,
+                                               quotesInformation,
+                                               books,
+                                               totalPrice
                                               ));
 
         }

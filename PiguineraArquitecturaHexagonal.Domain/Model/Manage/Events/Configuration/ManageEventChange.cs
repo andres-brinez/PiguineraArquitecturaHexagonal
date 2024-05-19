@@ -57,6 +57,16 @@ namespace PiguineraArquitecturaHexagonal.Domain.Model.Manage.Events.Configuratio
 
             });
 
+            AddSub((DomainEvent @event) =>
+            {
+                if (@event is not CalculatedQuote) return;
+                if (@event is not CalculatedQuote) return;
+                var domainEvent = (CalculatedQuote)@event;
+
+                manage.Quote = new Quote(domainEvent.Books);
+
+            });
+
         }
     }
 }

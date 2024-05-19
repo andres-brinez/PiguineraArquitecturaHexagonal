@@ -184,7 +184,7 @@ namespace PiguineraArquitecturaHexagonal.Domain.Model.Manage.Entities
         public override string ToString()
         {
             return
-                 $"{{\"IdSupplier\":{IdSupplier.Value()}," +
+                 $"{{\"IdSupplier\":\"{IdSupplier.Value()}\"," +
                  //$"{{\"IdSupplier\":\"{IdSupplier.Value()}\"," +
                  //$"\"Seniority\":\"{Seniority.Value()}\"," +
                  $"\"Title\":\"{Title.Value()}\"," +
@@ -193,7 +193,7 @@ namespace PiguineraArquitecturaHexagonal.Domain.Model.Manage.Entities
                  //$"\"OriginalPrice\":{OriginalPrice}," +
                  $"\"Discount\":{Discount.Value()}," +
                  $"\"UnitPrice\":{UnitPrice.Value()}," +
-                 $"\"TotalPrice\":{_TotalPrice.Value()}," +"}"; 
+                 $"\"TotalPrice\":{_TotalPrice.Value()}" +"}"; 
         }
 
        

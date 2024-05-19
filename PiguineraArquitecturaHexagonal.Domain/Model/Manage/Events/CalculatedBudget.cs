@@ -19,8 +19,8 @@ namespace PiguineraArquitecturaHexagonal.Domain.Model.Manage.Events
                                 ) :
                                     base(EventsEnumManage.CALCULATEDBUDGET.ToString(),
                                          $"{{\"IdSupplier\":\"{idSupplier}\"," +
-                                          //$"\"Books\":\"{JsonConvert.SerializeObject(books)}\"," +
-                                          $"\"Books\":[{string.Join(",", books.Select(book => book.ToString()))}]," +
+                                          //$"\"QuotesInformation\":\"{JsonConvert.SerializeObject(books)}\"," +
+                                          $"\"QuotesInformation\":[{string.Join(",", books.Select(book => book.ToString()))}]," +
                                           $"\"budgetValue\":\"{budgetValue}\"," +
                                           $"\"budgetValueFinal\":{ budgetValueFinal}}}" 
                                         )

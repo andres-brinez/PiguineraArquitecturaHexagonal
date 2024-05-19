@@ -20,13 +20,12 @@ namespace PiguineraArquitecturaHexagonal.Domain.Model.Manage.Entities
 
         public Purchese(List<Book> books) : base(new PurchaseId())
         {
-            //Books = books;
+            //QuotesInformation = books;
 
-            TotalPrice= new Values.Purchese.TotalPrice(books);
             QuantityBooks = new QuantityBooks(books);
             TypePurchase = new TypePurchase(QuantityBooks.Value());
             Books= CalculatePurcheseValue(books);
-
+            TotalPrice = new Values.Purchese.TotalPrice(this.Books);
 
         }
 
@@ -118,7 +117,7 @@ namespace PiguineraArquitecturaHexagonal.Domain.Model.Manage.Entities
 
         public override string ToString()
         {
-            return $"Books: {string.Join(", ", Books.Select(b => b.ToString()))}, " +
+            return $"QuotesInformation: {string.Join(", ", Books.Select(b => b.ToString()))}, " +
                    $"Total Price: {TotalPrice.Value}, " +
                    $"Quantity: {QuantityBooks.Value}, " +
                    $"Type Purchase: {TypePurchase.Value}";

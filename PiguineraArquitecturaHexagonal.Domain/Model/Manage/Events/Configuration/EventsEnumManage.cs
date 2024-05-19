@@ -4,7 +4,9 @@
     {
         BOOK_CREATED,
         CALCULATEDPAYMENT,
-        CALCULATEDBUDGET
+        CALCULATEDBUDGET,
+        CALCULATEDQUOTE
+
 
 
     }

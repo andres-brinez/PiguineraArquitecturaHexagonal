@@ -6,11 +6,11 @@ namespace PiguineraArquitecturaHexagonal.Infrastructure.API.DataTransferObject.O
     {
         public string IdSupplier { get; set; }
         public List<BookDataPurchese> Books { get; set; }
-        public string TotalPrice { get; set; }
+        public decimal TotalPrice { get; set; }
         public string TypePurchase { get; set; }
         public int QuantityBooks { get; set; }
 
-        public PurcheseOutputDTO(string idSupplier, List<BookDataPurchese> books, string totalPrice, string typePurchase, int quantityBooks)
+        public PurcheseOutputDTO(string idSupplier, List<BookDataPurchese> books, decimal totalPrice, string typePurchase, int quantityBooks)
         {
             IdSupplier = idSupplier;
             Books = books;
@@ -28,9 +28,9 @@ namespace PiguineraArquitecturaHexagonal.Infrastructure.API.DataTransferObject.O
         public string BookType { get; set; }
         public float Discount { get; set; }
         public float UnitPrice { get; set; }
-        public float TotalPrice { get; set; }
+        public decimal TotalPrice { get; set; }
 
-        public BookDataPurchese(string idSupplier, string title, int quantity, string bookType, float discount, float unitPrice, float totalPrice)
+        public BookDataPurchese(string idSupplier, string title, int quantity, string bookType, float discount, float unitPrice, decimal totalPrice)
         {
             IdSupplier = idSupplier;
             Title = title;

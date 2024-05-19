@@ -18,6 +18,16 @@ namespace PiguineraArquitecturaHexagonal.Domain.Model.Manage.Values.Purchese
             _totalPrice = (float)System.Math.Round(books.Sum(item => item.GetUnitPrice() * item.GetQuantity()), 2);
         }
 
+        public TotalPrice(float totalPrice)
+        {
+            if (totalPrice<0)
+            {
+                throw new ArgumentOutOfRangeException(nameof(totalPrice), "La lista de libros no puede ser null");
+            }
+
+            _totalPrice = totalPrice;
+        }
+
         public static TotalPrice Of(List<Entities.Book> books)
         {
             return new TotalPrice(books);

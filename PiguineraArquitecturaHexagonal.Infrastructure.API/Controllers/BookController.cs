@@ -6,6 +6,9 @@ using PiguineraArquitecturaHexagonal.Domain.Model.Manage.Values.Book;
 using PiguineraArquitecturaHexagonal.Infrastructure.API.DataTransferObject.Output;
 using PiguineraArquitecturaHexagonal.Infrastructure.API.DataTransferObject.Data;
 using PiguineraArquitecturaHexagonal.Domain.Model.Manage.Entities;
+using Newtonsoft.Json;
+using MongoDB.Bson;
+using Newtonsoft.Json.Linq;
 
 namespace PiguineraArquitecturaHexagonal.Infrastructure.API.Controllers
 {
@@ -61,7 +64,7 @@ namespace PiguineraArquitecturaHexagonal.Infrastructure.API.Controllers
 
         [HttpPost]
         [Route("calculateBooksPay")]
-        public async Task<IActionResult> calculateBooksPay([FromBody] CalculateBookPayDto payload, [FromServices] IInitialCommandUseCase<CalculatePaymentCommand> useCase)
+        public async Task<IActionResult> calculateBooksPay([FromBody] CalculateBooksPayInputDto payload, [FromServices] IInitialCommandUseCase<CalculatePaymentCommand> useCase)
         {
             try
             {
@@ -155,6 +158,67 @@ namespace PiguineraArquitecturaHexagonal.Infrastructure.API.Controllers
                 return new ObjectResult(ex.Message) { StatusCode = StatusCodes.Status400BadRequest };
             }
         }
+
+        [HttpPost]
+        [Route("calculateBooksQuotes")]
+        public async Task<IActionResult> calculateBooksQuotes([FromBody] CalculateBooksQuotesInputDto payload, [FromServices] IInitialCommandUseCase<CalculateQuoteCommand> useCase)
+        {
+            try
+            {
+
+                List<List<Book>> groupBooks = new List<List<Book>>();
+
+
+                foreach (var groupBooksInformation in payload.InformationBooks)
+                {
+                   
+
+                    List<Book> books = new List<Book>();
+
+                    foreach (var informationBook in groupBooksInformation)
+                    {
+                            var bookEvent = await _repository.GetById(informationBook.IdBook);
+
+                            var bookEventInformation = bookEvent.EventBody;
+
+                            dynamic BookDataToJson = Newtonsoft.Json.JsonConvert.DeserializeObject(bookEventInformation);
+
+                            TypeBook typeBook = BookDataToJson.bookType == "BOOK" ? TypeBook.BOOK : TypeBook.NOVEL;
+
+                            Book book = new Book(payload.IdSupplier,
+                                                  (decimal)BookDataToJson.discount,
+                                                  (string)BookDataToJson.title,
+                                                  informationBook.Quantity,
+                                                  typeBook,
+                                                  (int)BookDataToJson.unitPrice, ""
+                                                );
+
+                            books.Add(book);
+                    }
+                    groupBooks.Add(books);
+                   
+                }
+
+                CalculateQuoteCommand command = new CalculateQuoteCommand(payload.IdSupplier, groupBooks);
+
+                var eventBook = await useCase.Execute(command);
+       
+                string formattedJson = JToken.Parse(eventBook[0].EventBody).ToString(Formatting.Indented);
+
+                return new ObjectResult(formattedJson) { StatusCode = StatusCodes.Status200OK };
+            }
+            catch (JsonSerializationException ex)
+            {                
+                return new ObjectResult($"Deserialization error: {ex.Message}") { StatusCode = StatusCodes.Status400BadRequest };
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error");
+
+                return new ObjectResult(ex.Message) { StatusCode = StatusCodes.Status400BadRequest };
+            }
+        }
+
 
     }
 }
