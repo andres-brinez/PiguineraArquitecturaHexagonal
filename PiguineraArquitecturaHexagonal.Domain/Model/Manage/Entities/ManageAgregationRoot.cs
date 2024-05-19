@@ -44,15 +44,14 @@ namespace PiguineraArquitecturaHexagonal.Domain.Model.Manage.Entities
                                         Book.GetTotalPrice()));
         }
 
-        public void CalculatPayment ( string supplierId, List<string> booksId, List<Book> books)
+        public void CalculatePayment ( string supplierId, List<string> booksId, List<Book> books, float totalPrice, string typePurchase, int quantityBook)
         {
-            Purchese purchese = new Purchese(books);
             AppendEvent(new CalculatedPayment( supplierId,
                                                booksId,
-                                               purchese.GetBooks(),
-                                               purchese.GetTotalPrice(),
-                                               purchese.GetTypePurchase(),
-                                               purchese.GetQuantityBook()
+                                               books,
+                                               totalPrice,
+                                               typePurchase,
+                                               quantityBook
                                               ));
 
         }
