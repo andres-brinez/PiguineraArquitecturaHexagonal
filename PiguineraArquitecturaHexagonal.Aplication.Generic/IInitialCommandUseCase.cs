@@ -9,5 +9,6 @@ namespace PiguineraArquitecturaHexagonal.Application.Generic
         //Task<object> Execute(T command);
         Task<List<DomainEvent>> Execute(T command);
 
+
     }
 }

@@ -4,6 +4,7 @@ using PiguineraArquitecturaHexagonal.Application.Generic;
 using PiguineraArquitecturaHexagonal.Domain.Generic;
 using PiguineraArquitecturaHexagonal.Domain.Model.Manage.Commands;
 using PiguineraArquitecturaHexagonal.Domain.Model.Manage.Entities;
+using System.Reactive.Linq;
 
 namespace PiguineraArquitecturaHexagonal.Application.UseCases.Manage.Book
 {
@@ -23,10 +24,19 @@ namespace PiguineraArquitecturaHexagonal.Application.UseCases.Manage.Book
 
             var domainEvents = manage.GetUncommittedChanges().ToList();
 
-            domainEvents.ForEach(async (DomainEvent domainEvent) =>
-            {
-                await _repository.Save(domainEvent);
-            });
+            domainEvents
+             .ToObservable()
+             .Subscribe(async e =>
+             {
+                 try
+                 {
+                     await _repository.Save(e);
+                 }
+                 catch (Exception ex)
+                 {
+                     Console.WriteLine("Error al procesar eventos de dominio: {0}", ex.Message);
+                 }
+             });
 
             manage.MarkAsCommitted();
             return domainEvents;

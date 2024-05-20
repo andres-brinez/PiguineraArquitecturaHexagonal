@@ -12,7 +12,7 @@ namespace PiguineraArquitecturaHexagonal.Infrastructure.API.Controllers
     {
         [HttpPost]
         [Route("CreateSuppler")]
-        public async Task<IActionResult> CreateSuppler([FromBody] SupplierCreate payload, [FromServices] IInitialCommandUseCase<CreateSupplierCommnad> useCase)
+        public async Task<IActionResult> CreateCity([FromBody] SupplierCreate payload, [FromServices] IInitialCommandUseCase<CreateSupplierCommnad> useCase)
         {
             try
             {
@@ -26,6 +26,7 @@ namespace PiguineraArquitecturaHexagonal.Infrastructure.API.Controllers
                 if(userRegister.registerDate!=null) {
                     return new ObjectResult($"Usuario {userRegister.email} registrado correctamente") { StatusCode = StatusCodes.Status200OK };
                 }
+
 
                 return new ObjectResult("Error al registrar el usuario") { StatusCode = StatusCodes.Status400BadRequest };
             }

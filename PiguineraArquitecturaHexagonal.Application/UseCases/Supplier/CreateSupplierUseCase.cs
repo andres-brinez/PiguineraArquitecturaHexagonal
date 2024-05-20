@@ -2,6 +2,7 @@
 using PiguineraArquitecturaHexagonal.Domain.Generic;
 using PiguineraArquitecturaHexagonal.Domain.Model.Supplier.Commands;
 using PiguineraArquitecturaHexagonal.Domain.Model.Supplier.Entities;
+using System.Reactive.Linq;
 
 
 namespace PiguineraArquitecturaHexagonal.Application.UseCases.Supplier
@@ -21,10 +22,19 @@ namespace PiguineraArquitecturaHexagonal.Application.UseCases.Supplier
 
             var domainEvents = supplier.GetUncommittedChanges().ToList();
 
-            domainEvents.ForEach(async (DomainEvent domainEvent) =>
-            {
-                await _repository.Save(domainEvent);
-            });
+             domainEvents.
+                 ToObservable()
+                .Subscribe( async e =>
+                {
+                    try
+                    {
+                       await _repository.Save(e);
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine("Error al procesar eventos de dominio: {0}", ex.Message);
+                    }
+                });
 
             supplier.MarkAsCommitted();
             return domainEvents;

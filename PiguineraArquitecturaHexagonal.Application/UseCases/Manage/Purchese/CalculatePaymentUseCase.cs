@@ -2,6 +2,7 @@
 using PiguineraArquitecturaHexagonal.Domain.Generic;
 using PiguineraArquitecturaHexagonal.Domain.Model.Manage.Commands;
 using PiguineraArquitecturaHexagonal.Domain.Model.Manage.Entities;
+using System.Reactive.Linq;
 
 namespace PiguineraArquitecturaHexagonal.Application.UseCases.Manage.Purchese
 {
@@ -18,14 +19,26 @@ namespace PiguineraArquitecturaHexagonal.Application.UseCases.Manage.Purchese
         public async Task<List<DomainEvent>> Execute(CalculatePaymentCommand command)
         {
             var manage = new ManageAgregationRoot(command.IdSupplier);
-            manage.CalculatPayment(command.IdSupplier, command.BooksId, command.Books);
+            var purchese = manage.Purchese = new Domain.Model.Manage.Entities.Purchese(command.Books);
+
+            manage.CalculatePayment(command.IdSupplier, command.BooksId, purchese.GetBooks(),purchese.GetTotalPrice(),purchese.GetTypePurchase(),purchese.GetQuantityBook());
 
             var domainEvents = manage.GetUncommittedChanges().ToList();
 
-            domainEvents.ForEach(async (domainEvent) =>
-            {
-                await _repository.Save(domainEvent);
-            });
+            domainEvents
+             .ToObservable()
+             .Subscribe(async e =>
+             {
+                 try
+                 {
+                     await _repository.Save(e);
+                 }
+                 catch (Exception ex)
+                 {
+                     Console.WriteLine("Error al procesar eventos de dominio: {0}", ex.Message);
+                 }
+             });
+
 
             manage.MarkAsCommitted();
             return domainEvents;
