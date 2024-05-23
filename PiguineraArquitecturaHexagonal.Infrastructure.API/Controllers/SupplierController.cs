@@ -11,13 +11,13 @@ namespace PiguineraArquitecturaHexagonal.Infrastructure.API.Controllers
     public class SupplierController : Controller
     {
         [HttpPost]
-        [Route("CreateSuppler")]
-        public async Task<IActionResult> CreateCity([FromBody] SupplierCreate payload, [FromServices] IInitialCommandUseCase<CreateSupplierCommnad> useCase)
+        [Route("Register")]
+        public async Task<IActionResult> Register([FromBody] SupplierCreate payload, [FromServices] IInitialCommandUseCase<CreateSupplierCommnad> useCase)
         {
+
             try
             {
-
-                CreateSupplierCommnad command = new CreateSupplierCommnad(payload.Email,payload.Password);
+                CreateSupplierCommnad command = new CreateSupplierCommnad(payload.Name,payload.Email,payload.Password);
 
                 var eventResult = await useCase.Execute(command);
 
