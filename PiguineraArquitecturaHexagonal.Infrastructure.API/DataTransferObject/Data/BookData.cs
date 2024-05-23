@@ -6,6 +6,8 @@ namespace PiguineraArquitecturaHexagonal.Infrastructure.API.DataTransferObject.D
     {
         [JsonProperty("title")]
         public string Title { get; set; }
+        [JsonProperty("emailSupplier")]
+        public string emailSupplier { get; set; }
 
         [JsonProperty("bookType")]
         public string BookType { get; set; }

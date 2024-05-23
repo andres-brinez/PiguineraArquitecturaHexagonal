@@ -15,16 +15,20 @@ namespace PiguineraArquitecturaHexagonal.Infrastructure.API.DataTransferObject.O
     public class BookInformation
     {
         public string Id { get; set; }
+        public string EmailSupplier { get; set; }
         public string Title { get; set; }
         public string BookType { get; set; }
         public decimal UnitPrice { get; set; }
+        public float Discount { get; set; }
 
-        public BookInformation(string id, string title, string bookType, decimal unitPrice)
+        public BookInformation(string id, string emailSupplier, string title, string bookType, decimal unitPrice, float discount)
         {
             Id = id;
+            EmailSupplier = emailSupplier;
             Title = title;
             BookType = bookType;
             UnitPrice = unitPrice;
+            Discount = discount;
         }
 
         public override string? ToString()
