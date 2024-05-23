@@ -7,10 +7,7 @@ using PiguineraArquitecturaHexagonal.Infrastructure.API.DataTransferObject.Outpu
 using PiguineraArquitecturaHexagonal.Infrastructure.API.DataTransferObject.Data;
 using PiguineraArquitecturaHexagonal.Domain.Model.Manage.Entities;
 using Newtonsoft.Json;
-using MongoDB.Bson;
 using Newtonsoft.Json.Linq;
-using Microsoft.AspNetCore.Authorization;
-using PiguineraArquitecturaHexagonal.Infrastructure.Persistence;
 
 namespace PiguineraArquitecturaHexagonal.Infrastructure.API.Controllers
 {
@@ -40,8 +37,8 @@ namespace PiguineraArquitecturaHexagonal.Infrastructure.API.Controllers
                 int seniority = ProviderDataToJson.seniority;
 
                 TypeBook typeBook = (payload.Type == "BOOK") ? TypeBook.BOOK : TypeBook.NOVEL;
-                 
                 CreateBookCommand command = new CreateBookCommand( payload.IdProvider,
+                                                                   (string)ProviderDataToJson.email,
                                                                    seniority,
                                                                    payload.Title,
                                                                    payload.Quantity,
@@ -81,13 +78,18 @@ namespace PiguineraArquitecturaHexagonal.Infrastructure.API.Controllers
             {
 
                 var bookEventInformation = eventBook.EventBody;
+                Console.WriteLine(bookEventInformation);
+
 
                 dynamic BookDataToJson = Newtonsoft.Json.JsonConvert.DeserializeObject(bookEventInformation);
 
                 BookInformation book = new BookInformation(eventBook.UUID,
+                                      (string) BookDataToJson.emailSupplier,
                                       (string)BookDataToJson.title,
                                       (string)BookDataToJson.bookType,
-                                      (int)BookDataToJson.unitPrice
+                                      (int)BookDataToJson.unitPrice,
+                                      (float)BookDataToJson.discount
+
                                     );
 
                 Console.WriteLine(book.ToString());
