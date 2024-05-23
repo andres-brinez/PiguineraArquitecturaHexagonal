@@ -18,7 +18,7 @@ namespace PiguineraArquitecturaHexagonal.Application.UseCases.Supplier
         public async Task<List<DomainEvent>> Execute(CreateSupplierCommnad command)
         {
 
-            var supplier = new SupplierAgregateRoot(command.Email,command.Password);
+            var supplier = new SupplierAgregateRoot(command.UserName,command.Email,command.Password);
 
             var domainEvents = supplier.GetUncommittedChanges().ToList();
 

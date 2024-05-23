@@ -15,7 +15,7 @@ namespace PiguineraArquitecturaHexagonal.Domain.Model.Supplier.Entities
 
         }
 
-        public SupplierAgregateRoot(string email, string password) : base(new SupplierId())
+        public SupplierAgregateRoot(string name,string email, string password) : base(new SupplierId())
         {
 
             Subscribe(new SupplierEventChange(this));
@@ -27,7 +27,7 @@ namespace PiguineraArquitecturaHexagonal.Domain.Model.Supplier.Entities
 
             int seniority = añosTranscurridos;
 
-            AppendEvent(new CreatedSupplier(email,password,DateTime.Now, seniority));
+            AppendEvent(new CreatedSupplier(name, email,password,DateTime.Now, seniority));
 
         }
 
