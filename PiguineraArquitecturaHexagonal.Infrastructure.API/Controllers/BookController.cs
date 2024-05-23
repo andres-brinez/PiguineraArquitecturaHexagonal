@@ -9,6 +9,8 @@ using PiguineraArquitecturaHexagonal.Domain.Model.Manage.Entities;
 using Newtonsoft.Json;
 using MongoDB.Bson;
 using Newtonsoft.Json.Linq;
+using Microsoft.AspNetCore.Authorization;
+using PiguineraArquitecturaHexagonal.Infrastructure.Persistence;
 
 namespace PiguineraArquitecturaHexagonal.Infrastructure.API.Controllers
 {
@@ -60,6 +62,44 @@ namespace PiguineraArquitecturaHexagonal.Infrastructure.API.Controllers
 
                 return new ObjectResult(ex.Message) { StatusCode = StatusCodes.Status400BadRequest };
             }
+        }
+
+        [HttpGet("GetAllBooks")]
+        
+        public async Task<ActionResult> GetAllBooks()
+        {
+            var events = await _repository.GetAllByType("BOOK_CREATED");
+            var books = new List<BookInformation>();
+
+
+            if (events == null || !events.Any())
+            {
+                return NotFound($"No events found with type '{"BOOK_CREATED"}'");
+            }
+
+            foreach (var eventBook in events)
+            {
+
+                var bookEventInformation = eventBook.EventBody;
+
+                dynamic BookDataToJson = Newtonsoft.Json.JsonConvert.DeserializeObject(bookEventInformation);
+
+                BookInformation book = new BookInformation(eventBook.UUID,
+                                      (string)BookDataToJson.title,
+                                      (string)BookDataToJson.bookType,
+                                      (int)BookDataToJson.unitPrice
+                                    );
+
+                Console.WriteLine(book.ToString());
+                books.Add(book);
+                
+            }
+
+            AllBookDTO output = new AllBookDTO(books);
+            Console.WriteLine(output.Books[0].ToString());
+
+
+            return Ok(output);
         }
 
         [HttpPost]
