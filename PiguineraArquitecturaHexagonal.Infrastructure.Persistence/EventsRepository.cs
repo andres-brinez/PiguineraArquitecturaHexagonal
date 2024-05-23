@@ -1,4 +1,5 @@
-﻿using MongoDB.Driver;
+﻿using Microsoft.Extensions.Logging;
+using MongoDB.Driver;
 using PiguineraArquitecturaHexagonal.Application.Generic;
 using PiguineraArquitecturaHexagonal.Domain.Generic;
 
@@ -48,8 +49,16 @@ namespace PiguineraArquitecturaHexagonal.Infrastructure.Persistence
             return @event;
         }
 
+        public async Task<IEnumerable<DomainEvent>> GetAllByType(string type)
+        {
+            
+            var events = await _eventRepository.Find(e => e.Type == type).ToListAsync();
 
+            if (events == null)
+                return null;
 
-
+            return events;
+            
+        }
     }
 }

@@ -10,5 +10,10 @@ namespace PiguineraArquitecturaHexagonal.Application.Generic
         Task<List<DomainEvent>> Save(DomainEvent domainEvent);
         Task<DomainEvent> GetById(string id);
         Task<List<DomainEvent>> FindByAggregateId(string aggregateId);
+
+        Task<IEnumerable<DomainEvent>> GetAllByType(string type );
+
+
+
     }
 }
