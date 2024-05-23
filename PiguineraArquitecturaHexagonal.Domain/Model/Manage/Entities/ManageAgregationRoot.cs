@@ -28,12 +28,13 @@ namespace PiguineraArquitecturaHexagonal.Domain.Model.Manage.Entities
 
         }
 
-        public void  CreateBook(string supplierId, int seniority, string title, int quantity, TypeBook bookType, int originalPrice)
+        public void  CreateBook(string supplierId,string emailProvider, int seniority, string title, int quantity, TypeBook bookType, int originalPrice)
         {
 
-            Book = new Book(supplierId, seniority, title, quantity, bookType, originalPrice);
+            Book = new Book(supplierId, emailProvider, seniority, title, quantity, bookType, originalPrice);
 
             AppendEvent(new CreatedBook(supplierId,
+                                        Book.GetEmailProvider(),
                                         Book.GetSeniority(),
                                         Book.GetTitle(),
                                         Book.GetQuantity(),

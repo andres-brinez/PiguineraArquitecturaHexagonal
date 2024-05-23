@@ -3,6 +3,7 @@ using PiguineraArquitecturaHexagonal.Domain.Model.Manage.Values.Book;
 using PiguineraArquitecturaHexagonal.Domain.Model.Strategy;
 using PiguineraArquitecturaHexagonal.Domain.Model.Supplier.Values.Information;
 using PiguineraArquitecturaHexagonal.Domain.Model.Supplier.Values.Supplier;
+using PiguineraArquitecturaHexagonal.Domain.Model.Supplier.Values.UserCredential;
 using System.Text.Json.Serialization;
 
 namespace PiguineraArquitecturaHexagonal.Domain.Model.Manage.Entities
@@ -16,6 +17,7 @@ namespace PiguineraArquitecturaHexagonal.Domain.Model.Manage.Entities
         private readonly List<IDiscountStrategy> _discountStrategies = new List<IDiscountStrategy>();
 
         public SupplierId IdSupplier;
+        public Email EmailSupplier;
         public Seniority Seniority;
         public Title Title;
         public Quantity Quantity;
@@ -30,9 +32,10 @@ namespace PiguineraArquitecturaHexagonal.Domain.Model.Manage.Entities
         {
         }
 
-        public Book(string idProvider,int seniority, string title, int quantity, TypeBook bookType, int originalPrice) : base (new BookId())
+        public Book(string idProvider,string emailSupplier,int seniority, string title, int quantity, TypeBook bookType, int originalPrice) : base (new BookId())
         {
             IdSupplier =new SupplierId(idProvider);
+            EmailSupplier = new Email(emailSupplier);
             Seniority = new Seniority(seniority);
             Title =new Title(title);
             Quantity =new Quantity(quantity);
@@ -73,6 +76,8 @@ namespace PiguineraArquitecturaHexagonal.Domain.Model.Manage.Entities
             Book clone = new Book(this.Id);
 
             clone.IdSupplier = this.IdSupplier;
+            clone.EmailSupplier = this.EmailSupplier;
+
             clone.Seniority = this.Seniority;
             clone.Title = this.Title;
             clone.Quantity = this.Quantity;
@@ -90,6 +95,11 @@ namespace PiguineraArquitecturaHexagonal.Domain.Model.Manage.Entities
         public int GetSeniority()
         {
             return Seniority.Value();
+        }
+
+        public string GetEmailProvider()
+        {
+            return EmailSupplier.Value();
         }
 
         public string GetTitle()

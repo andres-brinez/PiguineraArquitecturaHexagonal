@@ -20,7 +20,7 @@ namespace PiguineraArquitecturaHexagonal.Application.UseCases.Manage.Book
         {
 
             var manage = new ManageAgregationRoot(command.idSupplier);
-            manage.CreateBook(command.idSupplier, command.seniority, command.title, command.quantity, command.bookType, command.originalPrice);
+            manage.CreateBook(command.idSupplier,command.emailSupplier, command.seniority, command.title, command.quantity, command.bookType, command.originalPrice);
 
             var domainEvents = manage.GetUncommittedChanges().ToList();
 

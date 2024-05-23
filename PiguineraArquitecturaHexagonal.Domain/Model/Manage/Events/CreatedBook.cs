@@ -7,6 +7,7 @@ namespace PiguineraArquitecturaHexagonal.Domain.Model.Manage.Events
     public class CreatedBook: DomainEvent
     {
         public string IdSupplier;
+        public string EmailSupplier;
         public int Seniority;
         public string Title;
         public int Quantity;
@@ -21,6 +22,7 @@ namespace PiguineraArquitecturaHexagonal.Domain.Model.Manage.Events
 
         public CreatedBook( 
                             string idSupplier,
+                            string emailsupplier,
                             int seniority,
                             string title,
                             int quantity,
@@ -32,6 +34,7 @@ namespace PiguineraArquitecturaHexagonal.Domain.Model.Manage.Events
                             ) :
                             base(EventsEnumManage.BOOK_CREATED.ToString(),
                                 $"{{\"idSupplier\":'\"{idSupplier}\"',"+
+                                $"\"emailSupplier\":\"{emailsupplier}\"," +
                                 $"\"seniority\":{seniority}," +
                                 $"\"title\":\"{title}\"," +
                                 $"\"quantity\":{quantity}," +
@@ -42,6 +45,7 @@ namespace PiguineraArquitecturaHexagonal.Domain.Model.Manage.Events
                                 $"\"totalPrice\":{totalPrice}}}")
         {
             IdSupplier = idSupplier;
+            EmailSupplier = emailsupplier;
             this.Seniority = seniority;
             Title = title;
             Quantity = quantity;

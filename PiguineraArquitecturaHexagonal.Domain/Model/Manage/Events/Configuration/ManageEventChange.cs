@@ -16,6 +16,7 @@ namespace PiguineraArquitecturaHexagonal.Domain.Model.Manage.Events.Configuratio
                 var domainEvent = (CreatedBook)@event;
 
                 manage.Book = new Book(domainEvent.IdSupplier,
+                                        domainEvent.EmailSupplier,
                                         domainEvent.Seniority,
                                         domainEvent.Title,
                                         domainEvent.Quantity,
