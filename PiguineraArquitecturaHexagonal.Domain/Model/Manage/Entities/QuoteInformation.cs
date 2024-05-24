@@ -50,13 +50,13 @@ namespace PiguineraArquitecturaHexagonal.Domain.Model.Manage.Entities
                                             
         public override string ToString()
         {
-            var booksJson = string.Join(", ", Books.Select(b => $"{{\"IdSupplier\":\"{b.IdSupplier.Value}\"," +
+            var booksJson = string.Join(", ", Books.Select(b => $"{{\"IdSupplier\":\"{b.IdSupplier.Value()}\"," +
                                                                                     $"\"Title\":\"{b.Title.Value()}\"," +
                                                                                     $"\"Quantity\":{b.Quantity.Value()}," +
                                                                                     $"\"BookType\":\"{b.BookType.Value()}\"," +
                                                                                     $"\"Discount\":{b.Discount.Value()}," +
                                                                                     $"\"UnitPrice\":{b.UnitPrice.Value()}" +
-                                                                                    $",\"TotalPrice\":{TotalPrice.Value()}}}"));
+                                                                                    $",\"TotalPrice\":{b.GetTotalPrice()}}}"));
 
             var quoteInfoJson = $"{{\"Quantity\":{QuantityBooks.Value()},\"TotalPrice\":{TotalPrice.Value()},\"TipePurchese\":\"{TypePurchase.Value()}\"}}";
 
