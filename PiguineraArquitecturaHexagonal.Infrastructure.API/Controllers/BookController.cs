@@ -7,7 +7,7 @@ using PiguineraArquitecturaHexagonal.Infrastructure.API.DataTransferObject.Outpu
 using PiguineraArquitecturaHexagonal.Infrastructure.API.DataTransferObject.Data;
 using PiguineraArquitecturaHexagonal.Domain.Model.Manage.Entities;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
+
 
 namespace PiguineraArquitecturaHexagonal.Infrastructure.API.Controllers
 {
@@ -37,7 +37,7 @@ namespace PiguineraArquitecturaHexagonal.Infrastructure.API.Controllers
                 int seniority = ProviderDataToJson.seniority;
 
                 TypeBook typeBook = (payload.Type == "BOOK") ? TypeBook.BOOK : TypeBook.NOVEL;
-                CreateBookCommand command = new CreateBookCommand( payload.IdProvider,
+                CreateBookCommand command = new CreateBookCommand(payload.IdProvider,
                                                                    (string)ProviderDataToJson.email,
                                                                    seniority,
                                                                    payload.Title,
@@ -45,7 +45,7 @@ namespace PiguineraArquitecturaHexagonal.Infrastructure.API.Controllers
                                                                    typeBook,
                                                                    payload.OriginalPrice
                                                                  );
-                
+
                 var eventBook = await useCase.Execute(command);
 
                 BookData bookDataToJson = Newtonsoft.Json.JsonConvert.DeserializeObject<BookData>(eventBook[0].EventBody);
@@ -62,7 +62,7 @@ namespace PiguineraArquitecturaHexagonal.Infrastructure.API.Controllers
         }
 
         [HttpGet("GetAllBooks")]
-        
+
         public async Task<ActionResult> GetAllBooks()
         {
             var events = await _repository.GetAllByType("BOOK_CREATED");
@@ -84,7 +84,7 @@ namespace PiguineraArquitecturaHexagonal.Infrastructure.API.Controllers
                 dynamic BookDataToJson = Newtonsoft.Json.JsonConvert.DeserializeObject(bookEventInformation);
 
                 BookInformation book = new BookInformation(eventBook.UUID,
-                                      (string) BookDataToJson.emailSupplier,
+                                      (string)BookDataToJson.emailSupplier,
                                       (string)BookDataToJson.title,
                                       (string)BookDataToJson.bookType,
                                       (int)BookDataToJson.unitPrice,
@@ -94,7 +94,7 @@ namespace PiguineraArquitecturaHexagonal.Infrastructure.API.Controllers
 
                 Console.WriteLine(book.ToString());
                 books.Add(book);
-                
+
             }
 
             AllBookDTO output = new AllBookDTO(books);
@@ -126,7 +126,7 @@ namespace PiguineraArquitecturaHexagonal.Infrastructure.API.Controllers
 
                     TypeBook typeBook = BookDataToJson.bookType == "BOOK" ? TypeBook.BOOK : TypeBook.NOVEL;
 
-                    Book book = new Book( payload.IdSupplier,
+                    Book book = new Book(payload.IdSupplier,
                                           (decimal)BookDataToJson.discount,
                                           (string)BookDataToJson.title,
                                           informationBook.Quantity,
@@ -139,7 +139,7 @@ namespace PiguineraArquitecturaHexagonal.Infrastructure.API.Controllers
 
 
                 CalculatePaymentCommand command = new CalculatePaymentCommand(payload.IdSupplier, booksId, books);
-                
+
                 var eventBook = await useCase.Execute(command);
                 PurcheseOutputDTO bookDataToJson = Newtonsoft.Json.JsonConvert.DeserializeObject<PurcheseOutputDTO>(eventBook[0].EventBody);
 
@@ -185,7 +185,7 @@ namespace PiguineraArquitecturaHexagonal.Infrastructure.API.Controllers
                 }
 
 
-                CalculateBudgetCommand command = new CalculateBudgetCommand(payload.IdSupplier,books, payload.Budget);
+                CalculateBudgetCommand command = new CalculateBudgetCommand(payload.IdSupplier, books, payload.Budget);
 
                 var eventBook = await useCase.Execute(command);
 
@@ -213,49 +213,47 @@ namespace PiguineraArquitecturaHexagonal.Infrastructure.API.Controllers
 
                 foreach (var groupBooksInformation in payload.InformationBooks)
                 {
-                   
-
                     List<Book> books = new List<Book>();
 
                     foreach (var informationBook in groupBooksInformation)
                     {
-                            var bookEvent = await _repository.GetById(informationBook.IdBook);
+                        var bookEvent = await _repository.GetById(informationBook.IdBook);
 
-                            var bookEventInformation = bookEvent.EventBody;
+                        var bookEventInformation = bookEvent.EventBody;
 
-                            dynamic BookDataToJson = Newtonsoft.Json.JsonConvert.DeserializeObject(bookEventInformation);
+                        dynamic BookDataToJson = Newtonsoft.Json.JsonConvert.DeserializeObject(bookEventInformation);
 
-                            TypeBook typeBook = BookDataToJson.bookType == "BOOK" ? TypeBook.BOOK : TypeBook.NOVEL;
+                        TypeBook typeBook = BookDataToJson.bookType == "BOOK" ? TypeBook.BOOK : TypeBook.NOVEL;
 
-                            Book book = new Book(payload.IdSupplier,
-                                                  (decimal)BookDataToJson.discount,
-                                                  (string)BookDataToJson.title,
-                                                  informationBook.Quantity,
-                                                  typeBook,
-                                                  (int)BookDataToJson.unitPrice, ""
-                                                );
+                        Book book = new Book(payload.IdSupplier,
+                                              (decimal)BookDataToJson.discount,
+                                              (string)BookDataToJson.title,
+                                              informationBook.Quantity,
+                                              typeBook,
+                                              (int)BookDataToJson.unitPrice, ""
+                                            );
 
-                            books.Add(book);
+                        books.Add(book);
                     }
                     groupBooks.Add(books);
-                   
+
                 }
 
                 CalculateQuoteCommand command = new CalculateQuoteCommand(payload.IdSupplier, groupBooks);
 
                 var eventBook = await useCase.Execute(command);
 
-                string formattedJson = JToken.Parse(eventBook[0].EventBody).ToString(Formatting.Indented);
+                QuotesOutputDTO quotesDTO = Newtonsoft.Json.JsonConvert.DeserializeObject<QuotesOutputDTO>(eventBook[0].EventBody);
 
-                return new ObjectResult(formattedJson) { StatusCode = StatusCodes.Status200OK };
+                return new ObjectResult(quotesDTO) { StatusCode = StatusCodes.Status200OK };
             }
             catch (JsonSerializationException ex)
-            {                
+            {
                 return new ObjectResult($"Deserialization error: {ex.Message}") { StatusCode = StatusCodes.Status400BadRequest };
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Error");
+                Console.WriteLine(ex);
 
                 return new ObjectResult(ex.Message) { StatusCode = StatusCodes.Status400BadRequest };
             }
